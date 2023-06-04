@@ -239,7 +239,7 @@ const descriptionElements: DescriptionElement[] = [
   {
     title: "University",
     subtitle: "University of Leeds: MEng & BSc Computer Science",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at semper elit. Donec placerat efficitur nulla, eget sagittis arcu tristique a. Nulla finibus a leo vel finibus. Curabitur vel dictum diam, eu tincidunt elit. Aliquam at purus sapien. Aliquam nec volutpat metus.",
+    text: "Finished my BSc in Computer Science with a First Class Honours (>70%) and I am currently studying for my MEng in Computer Science. The modules I have studied include: Software Engineering, Algorithms, Data Structures, Computer Graphics, Artificial Intelligence, Cryptography, and many more.",
     image: "/logo-leeds.png",
     imageAlt: "logo leeds",
     imageWidth: 220,
@@ -250,9 +250,9 @@ const descriptionElements: DescriptionElement[] = [
   {
     title: "Work",
     subtitle: "R Systems: Junior Software Engineer",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at semper elit. Donec placerat efficitur nulla, eget sagittis arcu tristique a. Nulla finibus a leo vel finibus. Curabitur vel dictum diam, eu tincidunt elit. Aliquam at purus sapien. Aliquam nec volutpat metus.",
+    text: "I am currently working as a Junior Software Engineer at R Systems, a company that provides outsourcing services in the telecom industry. I am currently maintaining and developing a Java + Rhino solution for a client in Netherlands. My responsibilities include: maintaining the current nodes and developing new ones, writing documentation, and providing support for the client.",
     image: "/logo-rsystems.png",
-    imageAlt: "logo rsystems",
+    imageAlt: "logo RSystems",
     imageWidth: 220,
     imageHeight: 173 * (220 / 288),
     imagePosition: "right",
@@ -305,16 +305,17 @@ const FirstParagraph = ({
           className={`${josefinSans.className} font-josefin-sans font-weight-400`}
           style={{ fontSize: "24px" }}
         >
-          Hi, I'm Bogdan!
+          Hi, I&apos;m Bogdan!
         </p>
         <p
           className={`${josefinSans.className} font-josefin-sans font-weight-400`}
           style={{ fontSize: "24px" }}
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at semper
-          elit. Donec placerat efficitur nulla, eget sagittis arcu tristique a.
-          Nulla finibus a leo vel finibus. Curabitur vel dictum diam, eu
-          tincidunt elit. Aliquam at purus sapien. Aliquam nec volutpat metus.
+          I&apos;m a Software Engineer who loves to learn new things and
+          challenge myself. I&apos;m currently studying Computer Science at the
+          University of Leeds. I have a passion for C++ and software
+          architecture challenges and I&apos;m always looking to improve my
+          skills.
         </p>
       </div>
     </div>
@@ -357,108 +358,6 @@ const AboutMe = () => {
         <p className="text-red-600">me</p>
       </div>
     </motion.div>
-  );
-};
-
-const PlaneAnimation = ({
-  windowSize,
-}: {
-  windowSize: { width: number; height: number };
-}) => {
-  const targetRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ["start 90vh", "end end"],
-  });
-
-  let animateXPositions = [51, 272, 391, 564, 729, 915, 1014, 1114, 1219];
-  animateXPositions = animateXPositions.map((x) => {
-    return x * (windowSize.width / 1440);
-  });
-
-  let frames = [0.04, 0.19, 0.27, 0.39, 0.51, 0.64, 0.71, 0.77, 0.85];
-  const head = 0.1;
-  frames = frames.map((frame) => {
-    return frame / (1 - head) + head;
-  });
-
-  const positionX = useTransform(scrollYProgress, frames, animateXPositions);
-  const positionY = useTransform(
-    scrollYProgress,
-    frames,
-    [51, 118, 83, 18, 46, 54, 46, 18, 38]
-  );
-  const rotation = useTransform(
-    scrollYProgress,
-    frames,
-    [-19, 0, 27, 12, -11, 0, 12, 0, -24]
-  );
-
-  const startFixed = 0.5;
-  const planeAnimationStylePosition = useTransform(scrollYProgress, (pos) => {
-    if (pos > startFixed) {
-      return "fixed";
-    } else {
-      return "relative";
-    }
-  });
-  const planeAnimationStyleTop = useTransform(scrollYProgress, (pos) => {
-    if (pos > startFixed) {
-      return "50%";
-    } else {
-      return "0%";
-    }
-  });
-  const planeAnimationStyleTransform = useTransform(scrollYProgress, (pos) => {
-    if (pos > startFixed) {
-      return "translateY(0%)";
-    } else {
-      return "translateY(0%)";
-    }
-  });
-  const planeAnimationStyleLeft = useTransform(scrollYProgress, (pos) => {
-    if (pos > startFixed) {
-      return (windowSize.width * 0.1) / 2;
-    } else {
-      return (windowSize.width * 0.1) / 2;
-    }
-  });
-
-  return (
-    <div className="pt-[20vh] pb-[100vh] w-[100vw]" ref={targetRef}>
-      <motion.div
-        style={{
-          position: planeAnimationStylePosition,
-          top: planeAnimationStyleTop,
-          // transform: planeAnimationStyleTransform,
-          marginLeft: planeAnimationStyleLeft,
-        }}
-        className="max-w-[90%] mx-auto"
-      >
-        <Image
-          className="mx-auto"
-          src="/plane-path.png"
-          alt="plane"
-          width={windowSize.width}
-          height={(windowSize.height / 920) * 150}
-        />
-        <motion.div
-          style={{
-            x: positionX,
-            y: positionY,
-            rotate: rotation,
-          }}
-          className="absolute top-0 left-0"
-        >
-          <Image
-            src="/plane-nb.png"
-            alt="plane"
-            width={144 * (windowSize.width / 1728)}
-            height={144 * (windowSize.width / 1728)}
-          />
-        </motion.div>
-      </motion.div>
-    </div>
   );
 };
 
@@ -700,7 +599,7 @@ function Home() {
         alt="blue to white"
         width={windowSize.width}
         height={100}
-        className="pb-[200px]"
+        className="pb-[150px]"
       />
       <ShowTechnologies windowSize={windowSize} />
     </main>

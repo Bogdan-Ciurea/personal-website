@@ -1,113 +1,710 @@
-import Image from 'next/image'
+"use client";
 
-export default function Home() {
+import { Roboto_Mono, Josefin_Sans, Metrophobic } from "next/font/google";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import {
+  motion,
+  useInView,
+  useAnimation,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import Link from "next/link";
+
+// Window size hook
+const useWindowSize = () => {
+  const [windowSize, setWindowSize] = useState({
+    width: 0 as number,
+    height: 0 as number,
+  });
+
+  useEffect(() => {
+    // only execute all the code below in client side
+    // Handler to call on window resize
+    function handleResize() {
+      // Set window width/height to state
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []); // Empty array ensures that effect is only run on mount
+  return windowSize;
+};
+
+// Fonts
+const robotoMono = Roboto_Mono({
+  subsets: ["latin"],
+  variable: "--font-roboto-mono",
+});
+
+const josefinSans = Josefin_Sans({
+  subsets: ["latin"],
+  weight: ["300"],
+  variable: "--font-josefin-sans",
+});
+
+const metrophobic = Metrophobic({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-metrophobic",
+});
+
+// Types
+type DescriptionElement = {
+  title: string;
+  subtitle: string;
+  text: string;
+
+  image: string;
+  imageAlt: string;
+  imageWidth: number;
+  imageHeight: number;
+  imagePosition: "left" | "right";
+
+  link: string | null;
+};
+
+type Technology = {
+  name: string;
+  image: string;
+  imageAlt: string;
+};
+
+type TechnologyCategory = {
+  name: string;
+  technologies: Technology[];
+};
+
+// Data
+const technologies: TechnologyCategory[] = [
+  {
+    name: "Workspace",
+    technologies: [
+      {
+        name: "Linux",
+        image: "/technologies/linux.svg",
+        imageAlt: "linux",
+      },
+      {
+        name: "Bash",
+        image: "/technologies/bash.svg",
+        imageAlt: "bash",
+      },
+      {
+        name: "Git",
+        image: "/technologies/git.svg",
+        imageAlt: "git",
+      },
+      {
+        name: "Docker",
+        image: "/technologies/docker.svg",
+        imageAlt: "docker",
+      },
+      {
+        name: "VS Code",
+        image: "/technologies/vscode.svg",
+        imageAlt: "vscode",
+      },
+      {
+        name: "Vim",
+        image: "/technologies/vim.svg",
+        imageAlt: "vim",
+      },
+    ],
+  },
+  {
+    name: "Languages",
+    technologies: [
+      {
+        name: "C++",
+        image: "/technologies/cpp.svg",
+        imageAlt: "cpp",
+      },
+      {
+        name: "C",
+        image: "/technologies/c.svg",
+        imageAlt: "c",
+      },
+      {
+        name: "Python",
+        image: "/technologies/python.svg",
+        imageAlt: "python",
+      },
+      {
+        name: "Java",
+        image: "/technologies/java.svg",
+        imageAlt: "java",
+      },
+      {
+        name: "SQL",
+        image: "/technologies/sql.svg",
+        imageAlt: "sql",
+      },
+    ],
+  },
+  {
+    name: "Web",
+    technologies: [
+      {
+        name: "HTML",
+        image: "/technologies/html.svg",
+        imageAlt: "html",
+      },
+      {
+        name: "CSS",
+        image: "/technologies/css.svg",
+        imageAlt: "css",
+      },
+      {
+        name: "JavaScript",
+        image: "/technologies/javascript.svg",
+        imageAlt: "javascript",
+      },
+      {
+        name: "Bootstrap",
+        image: "/technologies/bootstrap.svg",
+        imageAlt: "bootstrap",
+      },
+      {
+        name: "TypeScript",
+        image: "/technologies/typescript.svg",
+        imageAlt: "typescript",
+      },
+      {
+        name: "React",
+        image: "/technologies/react.svg",
+        imageAlt: "react",
+      },
+      {
+        name: "Next.js",
+        image: "/technologies/nextjs.svg",
+        imageAlt: "nextjs",
+      },
+      {
+        name: "T3",
+        image: "/technologies/t3.svg",
+        imageAlt: "t3",
+      },
+    ],
+  },
+  {
+    name: "More",
+    technologies: [
+      {
+        name: "LaTeX",
+        image: "/technologies/latex.svg",
+        imageAlt: "latex",
+      },
+      {
+        name: "Markdown",
+        image: "/technologies/markdown.svg",
+        imageAlt: "markdown",
+      },
+      {
+        name: "OpenGL",
+        image: "/technologies/opengl.svg",
+        imageAlt: "opengl",
+      },
+      {
+        name: "Figma",
+        image: "/technologies/figma.svg",
+        imageAlt: "figma",
+      },
+      {
+        name: "GitHub",
+        image: "/technologies/github.svg",
+        imageAlt: "github",
+      },
+      {
+        name: "GitLab",
+        image: "/technologies/gitlab.svg",
+        imageAlt: "gitlab",
+      },
+    ],
+  },
+];
+
+const descriptionElements: DescriptionElement[] = [
+  {
+    title: "University",
+    subtitle: "University of Leeds: MEng & BSc Computer Science",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at semper elit. Donec placerat efficitur nulla, eget sagittis arcu tristique a. Nulla finibus a leo vel finibus. Curabitur vel dictum diam, eu tincidunt elit. Aliquam at purus sapien. Aliquam nec volutpat metus.",
+    image: "/logo-leeds.png",
+    imageAlt: "logo leeds",
+    imageWidth: 220,
+    imageHeight: 220,
+    imagePosition: "left",
+    link: "/university",
+  },
+  {
+    title: "Work",
+    subtitle: "R Systems: Junior Software Engineer",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at semper elit. Donec placerat efficitur nulla, eget sagittis arcu tristique a. Nulla finibus a leo vel finibus. Curabitur vel dictum diam, eu tincidunt elit. Aliquam at purus sapien. Aliquam nec volutpat metus.",
+    image: "/logo-rsystems.png",
+    imageAlt: "logo rsystems",
+    imageWidth: 220,
+    imageHeight: 173 * (220 / 288),
+    imagePosition: "right",
+    link: null,
+  },
+];
+
+// Components
+const FirstParagraph = ({
+  windowSize,
+}: {
+  windowSize: { width: number; height: number };
+}) => {
+  // const [height, setHeight] = useState(341);
+  // const ref = useRef(null);
+
+  // useEffect(() => {
+  //   if (!ref?.current?.clientHeight) {
+  //     return;
+  //   }
+  //   setHeight(ref?.current?.clientHeight);
+  // }, [ref?.current?.clientHeight]);
+
+  // console.log(height);
+  // const margin = Math.ceil((windowSize.height - 125 - height - 50) / 2);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
+    <div
+      className={`mx-auto w-[1040px] max-w-[90%] flex flex-wrap my-[calc(50vh-300px)]`}
+      //mt-[calc(50vh-300px)] mb-[calc(50vh-300px)]
+      // ref={ref}
+    >
+      <div className="min-w-fit mx-auto">
         <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+          src="/image.jpeg"
+          alt="Bogdan Ciurea"
+          width="256"
+          height="341"
+          style={{ borderRadius: "11px" }}
         />
       </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="space-y-[20px] max-w-[90%] lg:max-w-[70%] mx-auto">
+        <h1
+          className={`${metrophobic.variable} font-metrophobic font-weight-400`}
+          style={{ fontSize: "64px" }}
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
+          Bogdan Ciurea
+        </h1>
+        <p
+          className={`${josefinSans.className} font-josefin-sans font-weight-400`}
+          style={{ fontSize: "24px" }}
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
+          Hi, I'm Bogdan!
+        </p>
+        <p
+          className={`${josefinSans.className} font-josefin-sans font-weight-400`}
+          style={{ fontSize: "24px" }}
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at semper
+          elit. Donec placerat efficitur nulla, eget sagittis arcu tristique a.
+          Nulla finibus a leo vel finibus. Curabitur vel dictum diam, eu
+          tincidunt elit. Aliquam at purus sapien. Aliquam nec volutpat metus.
+        </p>
       </div>
+    </div>
+  );
+};
+
+const AboutMe = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  const animate = useAnimation();
+
+  useEffect(() => {
+    if (isInView) {
+      animate.start({
+        x: 0,
+        opacity: 1,
+        transition: {
+          duration: 0.5,
+          type: "spring",
+          bounce: 0.25,
+          delay: 0.2,
+        },
+      });
+    }
+  }, [isInView]);
+
+  return (
+    <motion.div
+      className="pt-[114px] pb-[50px] w-[1040px] max-w-[90%] mx-auto"
+      initial={{ x: 300, opacity: 0 }}
+      animate={animate}
+    >
+      <div
+        className={`${robotoMono.variable} font-roboto-mono flex space-x-[20px] text-[46px] xl:text-[64px]`}
+      >
+        <p className="text-[#FFFFFC]" ref={ref}>
+          About
+        </p>
+        <p className="text-red-600">me</p>
+      </div>
+    </motion.div>
+  );
+};
+
+const PlaneAnimation = ({
+  windowSize,
+}: {
+  windowSize: { width: number; height: number };
+}) => {
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start 90vh", "end end"],
+  });
+
+  let animateXPositions = [51, 272, 391, 564, 729, 915, 1014, 1114, 1219];
+  animateXPositions = animateXPositions.map((x) => {
+    return x * (windowSize.width / 1440);
+  });
+
+  let frames = [0.04, 0.19, 0.27, 0.39, 0.51, 0.64, 0.71, 0.77, 0.85];
+  const head = 0.1;
+  frames = frames.map((frame) => {
+    return frame / (1 - head) + head;
+  });
+
+  const positionX = useTransform(scrollYProgress, frames, animateXPositions);
+  const positionY = useTransform(
+    scrollYProgress,
+    frames,
+    [51, 118, 83, 18, 46, 54, 46, 18, 38]
+  );
+  const rotation = useTransform(
+    scrollYProgress,
+    frames,
+    [-19, 0, 27, 12, -11, 0, 12, 0, -24]
+  );
+
+  const startFixed = 0.5;
+  const planeAnimationStylePosition = useTransform(scrollYProgress, (pos) => {
+    if (pos > startFixed) {
+      return "fixed";
+    } else {
+      return "relative";
+    }
+  });
+  const planeAnimationStyleTop = useTransform(scrollYProgress, (pos) => {
+    if (pos > startFixed) {
+      return "50%";
+    } else {
+      return "0%";
+    }
+  });
+  const planeAnimationStyleTransform = useTransform(scrollYProgress, (pos) => {
+    if (pos > startFixed) {
+      return "translateY(0%)";
+    } else {
+      return "translateY(0%)";
+    }
+  });
+  const planeAnimationStyleLeft = useTransform(scrollYProgress, (pos) => {
+    if (pos > startFixed) {
+      return (windowSize.width * 0.1) / 2;
+    } else {
+      return (windowSize.width * 0.1) / 2;
+    }
+  });
+
+  return (
+    <div className="pt-[20vh] pb-[100vh] w-[100vw]" ref={targetRef}>
+      <motion.div
+        style={{
+          position: planeAnimationStylePosition,
+          top: planeAnimationStyleTop,
+          // transform: planeAnimationStyleTransform,
+          marginLeft: planeAnimationStyleLeft,
+        }}
+        className="max-w-[90%] mx-auto"
+      >
+        <Image
+          className="mx-auto"
+          src="/plane-path.png"
+          alt="plane"
+          width={windowSize.width}
+          height={(windowSize.height / 920) * 150}
+        />
+        <motion.div
+          style={{
+            x: positionX,
+            y: positionY,
+            rotate: rotation,
+          }}
+          className="absolute top-0 left-0"
+        >
+          <Image
+            src="/plane-nb.png"
+            alt="plane"
+            width={144 * (windowSize.width / 1728)}
+            height={144 * (windowSize.width / 1728)}
+          />
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+};
+
+const ShowWork = ({
+  element,
+  windowSize,
+}: {
+  element: DescriptionElement;
+  windowSize: { width: number; height: number };
+}) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  const animateImage = useAnimation();
+  const animateText = useAnimation();
+
+  const start = element.imagePosition === "right" ? -300 : 300;
+
+  useEffect(() => {
+    if (isInView) {
+      animateImage.start({
+        x: 0,
+        opacity: 1,
+        transition: {
+          duration: 0.5,
+          type: "spring",
+          bounce: 0.25,
+          delay: 0.3,
+        },
+      });
+      animateText.start({
+        x: 0,
+        opacity: 1,
+        transition: {
+          duration: 0.5,
+          type: "spring",
+          bounce: 0.25,
+          delay: 0.3,
+        },
+      });
+    }
+  }, [isInView]);
+
+  return (
+    <div
+      className={`flex flex-wrap w-[1040px] max-w-[90%] mx-auto pt-[100px] pb-[100px] items-center text-[#FFFFFC] ${
+        element.imagePosition === "right" ? "flex-row-reverse" : "flex-row"
+      }`}
+    >
+      <motion.div
+        initial={{ x: -start, opacity: 0 }}
+        animate={animateImage}
+        className={
+          (windowSize.width < 1000 ? "w-[100%] mx-auto" : "") +
+          (element.imagePosition === "left" ? "lg:pr-[50px]" : "lg:pl-[50px]")
+        }
+      >
+        <Image
+          src={element.image}
+          className="width-[220px] height-[220px] mx-auto"
+          alt={element.imageAlt}
+          width={element.imageWidth}
+          height={element.imageHeight}
+        />
+      </motion.div>
+
+      <motion.div
+        className="w-[70%] space-y-3 mx-auto"
+        initial={{ x: start, opacity: 0 }}
+        animate={animateText}
+        ref={ref}
+      >
+        <h1
+          className={
+            `${metrophobic.className} font-metrophobic font-weight-400 text-right` +
+            (element.imagePosition === "right" ? "" : "text-left")
+          }
+          style={{ fontSize: "36px" }}
+        >
+          {element.title}
+        </h1>
+        <h3
+          className={
+            `${metrophobic.className} font-metrophobic font-weight-400 text-right` +
+            (element.imagePosition === "right" ? "" : "text-left")
+          }
+          style={{ fontSize: "28px" }}
+        >
+          {element.subtitle}
+        </h3>
+        <p
+          className={`${josefinSans.className} font-josefin-sans font-weight-200 text-justify`}
+          style={{ fontSize: "24px" }}
+        >
+          {element.text}
+        </p>
+        {element.link !== null ? (
+          <Link
+            href={element.link}
+            className={`${josefinSans.className} font-josefin-sans font-weight-200`}
+            style={{ fontSize: "20px" }}
+          >
+            Read more {"->"}
+          </Link>
+        ) : (
+          <></>
+        )}
+      </motion.div>
+    </div>
+  );
+};
+
+const ShowTechnologies = (
+  {
+    windowSize,
+  }: {
+    windowSize: { width: number; height: number };
+  } = { windowSize: { width: 0, height: 0 } }
+) => {
+  const [selected, setSelected] = useState<number>(0);
+  const [lastSelected, setLastSelected] = useState<number>(0);
+
+  return (
+    <div className="w-[1500px] max-w-[90%] mx-auto mb-[200px]">
+      <h1
+        className={`${robotoMono.variable} font-roboto-mono font-weight-400 text-[36px] lg:text-[46px] xl:text-[64px] text-center pb-[20px]`}
+      >
+        Technologies
+      </h1>
+      <div className="flex flex-wrap justify-center space-x-[40px]">
+        {technologies.map((category, index) => {
+          return (
+            <motion.button
+              whileHover={{
+                scale: 1.1,
+              }}
+              whileTap={{
+                scale: 0.9,
+              }}
+              className={`${
+                selected === index
+                  ? "bg-[#FFFFFC] text-[#003F91] border-[#003F91] border-2"
+                  : "bg-[#003F91] text-[#FFFFFC] hover:bg-[#003376]"
+              } ${
+                metrophobic.variable
+              } font-metrophobic font-weight-400 text-[24px] px-[20px] py-[10px] rounded-[10px] m-[10px]`}
+              onClick={() => {
+                setLastSelected(selected);
+                setSelected(index);
+              }}
+              key={category.name}
+            >
+              {category.name}
+            </motion.button>
+          );
+        })}
+      </div>
+
+      <motion.div
+        className="w-[100%] min-h-[300px] mt-[65px] bg-[#F8F8F8] rounded-2xl flex flex-wrap justify-around"
+        variants={{
+          initial: {
+            x: 300 * -(lastSelected - selected),
+            opacity: 0,
+          },
+          animate: {
+            x: 0,
+            opacity: 1,
+          },
+          exit: {
+            x: 300 * (lastSelected - selected),
+            opacity: 0,
+          },
+        }}
+        transition={{
+          duration: 1,
+          type: "spring",
+          bounce: 0.25,
+        }}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        key={selected}
+      >
+        {technologies[selected].technologies.map((technology) => {
+          return (
+            <div
+              className="flex flex-col justify-center items-center my-auto w-[100px] h-[100px] md:w-[200px] md:h-[200px]"
+              key={technology.name}
+            >
+              <Image
+                src={technology.image}
+                alt={technology.imageAlt}
+                width={windowSize.width < 768 ? 50 : 100}
+                height={windowSize.width < 768 ? 50 : 100}
+              />
+              <p
+                className={`${josefinSans.className} font-josefin-sans font-weight-200 text-center pt-[10px]`}
+                style={{ fontSize: "20px" }}
+              >
+                {technology.name}
+              </p>
+            </div>
+          );
+        })}
+      </motion.div>
+    </div>
+  );
+};
+
+function Home() {
+  const windowSize = useWindowSize();
+
+  return (
+    <main>
+      <FirstParagraph windowSize={windowSize} />
+      <Image
+        src="/white-to-blue.svg"
+        alt="white to blue"
+        width={windowSize.width}
+        height={100}
+      />
+      <div className="h-auto  bg-[#003F91] pb-[100px]">
+        {/* This is the About me part */}
+        <AboutMe />
+        {/* <PlaneAnimation windowSize={windowSize} /> */}
+        {descriptionElements.map((element) => {
+          return (
+            <ShowWork
+              element={element}
+              windowSize={windowSize}
+              key={element.title}
+            />
+          );
+        })}
+      </div>
+      <Image
+        src="/blue-to-white.svg"
+        alt="blue to white"
+        width={windowSize.width}
+        height={100}
+        className="pb-[200px]"
+      />
+      <ShowTechnologies windowSize={windowSize} />
     </main>
-  )
+  );
 }
+
+export default Home;

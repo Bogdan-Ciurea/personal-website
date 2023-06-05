@@ -14,22 +14,29 @@ export const getMDXFile = async (
   slug: string,
   option: "projects" | "articles"
 ): Promise<MDXFile> => {
-  const source = fs.readFileSync(
-    path.join(projectsDirectory, option, `${slug}.mdx`),
-    "utf8"
-  );
+  try {
+    const source = fs.readFileSync(
+      path.join(projectsDirectory, option, `${slug}.mdx`),
+      "utf8"
+    );
 
-  const { frontmatter, content } = await compileMDX({
-    source,
-    options: {
-      parseFrontmatter: true,
-    },
-  });
+    const { frontmatter, content } = await compileMDX({
+      source,
+      options: {
+        parseFrontmatter: true,
+      },
+    });
 
-  return {
-    metadata: { ...frontmatter, slug },
-    content,
-  };
+    return {
+      metadata: { ...frontmatter, slug },
+      content,
+    };
+  } catch (error) {
+    return {
+      metadata: {},
+      content: <h1 className="text-center">This project does not exists!</h1>,
+    };
+  }
 };
 
 export const getPostsMetadata = async (

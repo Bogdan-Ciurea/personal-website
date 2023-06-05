@@ -2,14 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Roboto_Mono } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-
-const robotoMono = Roboto_Mono({
-  subsets: ["latin"],
-  weight: "400",
-});
+import { robotoMono } from "../data";
 
 type Link = {
   name: string;
@@ -18,7 +13,17 @@ type Link = {
 };
 
 const Header = () => {
-  const pathname = usePathname();
+  // Get the pathname of the current page and remove the trailing slash and any query parameters
+  // or any paths after the trailing slash.
+  const currentPath = usePathname();
+  const slashCount = currentPath.split("/").length - 1;
+  let pathname = "";
+  if (slashCount > 1) {
+    const secondSlash = currentPath.indexOf("/", 1);
+    pathname = currentPath.substring(0, secondSlash);
+  } else {
+    pathname = currentPath;
+  }
 
   const links: Link[] = [
     {
@@ -87,7 +92,7 @@ const Header = () => {
               >
                 <Link
                   href={link.link}
-                  className={robotoMono.className}
+                  className={`${robotoMono.variable} font-roboto-mono hover:underline`}
                   style={{
                     color: link.color,
                     fontSize: "24px",

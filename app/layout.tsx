@@ -26,31 +26,6 @@ export default function RootLayout({
       </head>
       <body>
         <AnimatePresence mode={"wait"}>
-          <motion.div
-            key={router}
-            initial="initialState"
-            animate="animateState"
-            exit="exitState"
-            transition={{
-              duration: 0.6,
-            }}
-            variants={{
-              initialState: {
-                backgroundColor: "#003F91",
-                // clipPath: "polygon(50% 0, 50% 0, 50% 100%, 50% 100%)",
-                clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
-              },
-              animateState: {
-                backgroundColor: "#003F91",
-                clipPath: "polygon(50% 0, 50% 0, 50% 100%, 50% 100%)",
-              },
-              exitState: {
-                backgroundColor: "#003F91",
-                clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
-              },
-            }}
-            className="bg-[#003F91] w-screen h-screen fixed top-0 left-0 z-50"
-          />
           <Header />
           {children}
         </AnimatePresence>

@@ -11,6 +11,7 @@ import {
   useTransform,
 } from "framer-motion";
 import Link from "next/link";
+import { getPostsMetadata } from "@/lib/mdx";
 
 // Window size hook
 const useWindowSize = () => {
@@ -266,22 +267,9 @@ const FirstParagraph = ({
 }: {
   windowSize: { width: number; height: number };
 }) => {
-  // const [height, setHeight] = useState(341);
-  // const ref = useRef(null);
-
-  // useEffect(() => {
-  //   if (!ref?.current?.clientHeight) {
-  //     return;
-  //   }
-  //   setHeight(ref?.current?.clientHeight);
-  // }, [ref?.current?.clientHeight]);
-
-  // console.log(height);
-  // const margin = Math.ceil((windowSize.height - 125 - height - 50) / 2);
-
   return (
     <div
-      className={`mx-auto w-[1040px] max-w-[90%] flex flex-wrap my-[calc(50vh-300px)]`}
+      className="mx-auto w-[1040px] max-w-[90%] flex flex-wrap my-[calc(50vh-300px)]"
       //mt-[calc(50vh-300px)] mb-[calc(50vh-300px)]
       // ref={ref}
     >
@@ -568,8 +556,32 @@ const ShowTechnologies = (
   );
 };
 
-function Home() {
+const ShowProjects = ({
+  projects,
+}: {
+  projects: Record<string, unknown>[];
+}) => {
+  return (
+    <div className="w-[1500px] max-w-[90%] mx-auto mb-[200px]">
+      <h1
+        className={`${robotoMono.variable} font-roboto-mono font-weight-400 text-[36px] lg:text-[46px] xl:text-[64px] text-center pb-[20px]`}
+      >
+        Projects
+      </h1>
+      <ul>
+        {projects.map((project) => (
+          <li key={project.slug as string}>{project.title as string}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+async function Page() {
   const windowSize = useWindowSize();
+
+  const projects = await getPostsMetadata("projects");
+  console.log(projects);
 
   return (
     <main>
@@ -602,8 +614,9 @@ function Home() {
         className="pb-[150px]"
       />
       <ShowTechnologies windowSize={windowSize} />
+      <ShowProjects projects={projects} />
     </main>
   );
 }
 
-export default Home;
+export default Page;

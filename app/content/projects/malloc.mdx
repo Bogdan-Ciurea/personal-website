@@ -1,0 +1,49 @@
+---
+priority: 3
+title: "Malloc & Free Implementation"
+author: "Bogdan Ciurea"
+type: "University Project"
+---
+
+# Malloc & Free Implementation
+
+## Description
+
+This project is an implementation of the malloc and free functions in C. The malloc function allocates a block of memory of a given size and returns a pointer to the beginning of the block. The free function frees a block of memory that was previously allocated by malloc or realloc. The implementation is based on the buddy system, which is a memory allocation and management algorithm that divides memory into partitions to try to satisfy a memory request as suitably as possible. The implementation is also based on a linked list, which is a linear data structure where each element is a separate object. Each element (we will call it a node) of a list is comprising of two items - the data and a reference to the next node. The last node has a reference to null. The entry point into a linked list is called the head of the list. It should be noted that the implementation is not thread safe.
+
+The next program is intended to simulate a malloc and a free in the [XV6](https://github.com/mit-pdos/xv6-riscv) Operating System.
+This program was written for a coursework from University.
+
+## How to use
+
+In order to use the code you will have to `git clone https://github.com/mit-pdos/xv6-riscv` on your local machine.
+In the Makefile add the following code on line 130: `$U/_memory_management\` .
+Then run `make`, `make qemu`. After the files have been compiled the terminal should display the next text:
+`hart 2 starting`
+`hart 1 starting`
+`init: starting sh`
+`$`
+After this just type `memory_management` and the program will run. This should show some of the testing that has been done.
+
+## Explanations
+
+In the next files you can see a type of implementation of the malloc and free function that the C programming language uses.
+These functions will allocate memory in the **heap** of the program.
+The program will keep track of all of the blocks of memory using a linked list of structs presented in the `memory_management.h`.
+
+### How the program will work
+
+1.  When **allocation memory** for the **first time**, the program will use the `sbrk()` to see where is the top of the heap and allocate memory there.
+2.  If we already freed some memory and the block that we want to allocate can be placed in that free space, we can spit that freed space into two parts.
+
+When trying to **free the memory** we will have three cases:
+
+1.  If the memory is at the **top of the heap**, we will just move the top of the heap down by calling `sbrk()` with a negative value;
+2.  If the memory has a **neighboring free blocks** the two/three blocks will be merged
+3.  If none of the above cases happened, the block will just be considered free
+
+## Disclaimer
+
+The following code is only usable in a XV6 machine although the code is written in a simple type of C.
+To use the code on another machine, you should change the headers in the `memory_management.h` file to `#include <stdio.h>` but also to delete the `#define  NULL  (void*)  0` line (in XV6 there is no definition of `NULL`).
+You can also change the `exit (0);` to `return 0;` on the last line of the `main` function but this will not change the way `_malloc()` and `_free()` will work;

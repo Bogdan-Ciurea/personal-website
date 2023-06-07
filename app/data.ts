@@ -4,11 +4,12 @@ import { Roboto_Mono, Josefin_Sans, Metrophobic } from "next/font/google";
 export const robotoMono = Roboto_Mono({
   subsets: ["latin"],
   variable: "--font-roboto-mono",
+  weight: ["200", "400", "500", "700"],
 });
 
 export const josefinSans = Josefin_Sans({
   subsets: ["latin"],
-  weight: ["300"],
+  weight: ["200", "300", "700"],
   variable: "--font-josefin-sans",
 });
 

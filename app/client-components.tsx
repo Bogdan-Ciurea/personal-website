@@ -4,7 +4,7 @@ import { josefinSans, metrophobic, robotoMono, technologies } from "./data";
 import { motion, useAnimation, useInView } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { DescriptionElement } from "./data";
 
 // Window size hook
@@ -142,16 +142,16 @@ export const ShowWork = ({ element }: { element: DescriptionElement }) => {
       >
         <h1
           className={
-            `${metrophobic.className} font-metrophobic font-weight-400 text-right` +
+            `${robotoMono.variable} font-roboto-mono text-right` +
             (element.imagePosition === "right" ? "" : "text-left")
           }
-          style={{ fontSize: "36px" }}
+          style={{ fontSize: "36px", fontWeight: 400 }}
         >
           {element.title}
         </h1>
         <h3
           className={
-            `${metrophobic.className} font-metrophobic font-weight-400 text-right` +
+            `${metrophobic.className} font-metrophobic text-right` +
             (element.imagePosition === "right" ? "" : "text-left")
           }
           style={{ fontSize: "28px" }}
@@ -159,18 +159,18 @@ export const ShowWork = ({ element }: { element: DescriptionElement }) => {
           {element.subtitle}
         </h3>
         <p
-          className={`${josefinSans.className} font-josefin-sans font-weight-200 text-justify`}
-          style={{ fontSize: "24px" }}
+          className={`${josefinSans.className} font-josefin-sans text-justify`}
+          style={{ fontSize: "24px", fontWeight: 200 }}
         >
           {element.text}
         </p>
         {element.link !== null ? (
           <Link
             href={element.link}
-            className={`${josefinSans.className} font-josefin-sans font-weight-200`}
+            className={`${josefinSans.className} font-josefin-sans`}
             style={{ fontSize: "20px" }}
           >
-            Read more {"->"}
+            Read more &rarr;
           </Link>
         ) : (
           <></>

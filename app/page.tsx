@@ -35,19 +35,18 @@ const FirstParagraph = () => {
       </div>
       <div className="space-y-[20px] max-w-[90%] lg:max-w-[70%] mx-auto">
         <h1
-          className={`${metrophobic.variable} font-metrophobic font-weight-400`}
-          style={{ fontSize: "64px" }}
+          className={`${metrophobic.variable} font-metrophobic text-[36px] lg:text-[46px] xl:text-[64px]]`}
         >
           Bogdan Ciurea
         </h1>
         <p
-          className={`${josefinSans.className} font-josefin-sans font-weight-400`}
+          className={`${josefinSans.className} font-josefin-sans`}
           style={{ fontSize: "24px" }}
         >
           Hi, I&apos;m Bogdan!
         </p>
         <p
-          className={`${josefinSans.className} font-josefin-sans font-weight-400`}
+          className={`${josefinSans.className} font-josefin-sans`}
           style={{ fontSize: "24px" }}
         >
           I&apos;m a Software Engineer who loves to learn new things and
@@ -84,7 +83,7 @@ const Project = ({
   return (
     <div className="flex flex-col h-min[400px] h-auto bg-[#05165290] rounded-xl">
       <h1
-        className={`${robotoMono.variable} font-roboto-mono font-weight-400 text-[30px] lg:text-[40px] m-5`}
+        className={`${robotoMono.variable} font-roboto-mono text-[30px] lg:text-[40px] m-5`}
       >
         {title}
       </h1>
@@ -102,7 +101,7 @@ const Project = ({
         </div>
       </div>
       <p
-        className={`${josefinSans.className} font-josefin-sans font-weight-400 text-[24px] lg:text-[34px] text-justify m-5`}
+        className={`${josefinSans.className} font-josefin-sans text-[24px] lg:text-[34px] text-justify m-5`}
       >
         {description}
       </p>
@@ -112,7 +111,7 @@ const Project = ({
 
       <Link
         href={`/projects/${slug}`}
-        className={`${josefinSans.className} font-josefin-sans font-weight-400 text-[16px] lg:text-[24px] text-center my-5`}
+        className={`${josefinSans.className} font-josefin-sans text-[16px] lg:text-[24px] text-center my-5`}
       >
         See project
       </Link>

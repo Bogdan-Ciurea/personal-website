@@ -20,31 +20,21 @@ For this project I have decided to use the following technologies:
 7.  [**StackEdit**](https://stackedit.io/) for creating the `.md` files
 8.  [**Draw.io**](https://www.draw.io/) for creating the diagrams
 
-This is, at the time of developing the code, my biggest project. 😁
-
 For more details that also cover code, please read the the [Design Document](DesignDocument.md).
 
 Keep in mind that the project has two versions.
 The first one contains a visualizer of some of the most important sorting algorithms and did not have all the features of a fully fleshed program.
 The second one contains more algorithms that the first one and will incorporate algorithms from 4 fields.
-|Sorting | Search | Graph | Trees |
-|--|--|--|--|
-| Insertion Sort | Linear Search | Dijkstra's algorithm | Binary Trees |
-| Heap Sort | Binary Search | Floyd Warshall's algorithm | Red Black Trees |
-| Selection Sort | Jump Search | BFS && DFS | |
-| Merge Sort | Interpolation Search | A\* | |
-| Quick Sort | | Prim’s algorithm | |
-| Bubble Sort | | Kruskal’s algorithm | |
-||| Topological sorting ||
 
-## Table of Contents
-
-1.  [How to Install and Run the Project](#how-to-install-and-run-the-project)
-2.  [How to Use the Project](#how-to-use-the-project)
-3.  [Structure of code](#structure-of-code)
-4.  [Included Tests](#included-tests)
-5.  [CI/CD](#ci/cd)
-6.  [Credits](#credits)
+| Sorting        | Search               | Graph                      | Trees           |
+| -------------- | -------------------- | -------------------------- | --------------- |
+| Insertion Sort | Linear Search        | Dijkstra's algorithm       | Binary Trees    |
+| Heap Sort      | Binary Search        | Floyd Warshall's algorithm | Red Black Trees |
+| Selection Sort | Jump Search          | BFS && DFS                 |                 |
+| Merge Sort     | Interpolation Search | A\*                        |                 |
+| Quick Sort     |                      | Prim’s algorithm           |                 |
+| Bubble Sort    |                      | Kruskal’s algorithm        |                 |
+|                |                      | Topological sorting        |                 |
 
 ## How to Install and Run the Project
 
@@ -121,29 +111,20 @@ The repo folder will contain some important files:
 - `assets/diagram.png` -> a diagram of the structure of the project
 - `assets/DesignDocument.md` -> a design document that will go into more detain over everything
 
+```
 ├── assets
-
 │ └── diagram.png
-
 ├── CMakeLists.txt
-
 ├── include
-
 │ ├── raygui.h
-
 │ └── raylib.h
-
 ├── libs
-
 │ └── libraylib.so.400
-
 ├── README.md
-
 ├── DesignDocument.md
-
 └── src
-
-| └── main.cpp
+└── main.cpp
+```
 
 For more details that also cover code, please read the the [Design Document](DesignDocument.md).
 

@@ -69,7 +69,8 @@ const ShowProjects = ({
   return (
     <div className="w-[1500px] max-w-[90%] mx-auto mb-[50px]">
       <h1
-        className={`${robotoMono.variable} font-roboto-mono font-weight-400 text-[36px] lg:text-[46px] xl:text-[64px] text-center py-[50px]`}
+        className={`${robotoMono.variable} font-roboto-mono font-weight-400 text-[36px] lg:text-[46px] xl:text-[54px] text-center py-[50px]`}
+        style={{ fontWeight: 300 }}
       >
         Projects
       </h1>

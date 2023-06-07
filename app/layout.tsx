@@ -1,20 +1,25 @@
-"use client";
+// "use client";
 
 import "./globals.css";
 import Header from "./components/header";
-import { motion, AnimatePresence } from "framer-motion";
-import { usePathname } from "next/navigation";
+// import { motion, AnimatePresence } from "framer-motion";
+// import { usePathname } from "next/navigation";
+
+export const metadata = {
+  title: "Bogdan Ciurea",
+  description: "Bogdan Ciurea's personal website",
+};
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const router = usePathname();
+  // const router = usePathname();
 
   return (
     <html lang="en">
-      <head>
+      {/* <head>
         <title>Bogdan Ciurea</title>
         <meta name="description" content="Bogdan Ciurea's personal website" />
         <meta name="author" content="Bogdan Ciurea" />
@@ -23,10 +28,10 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/logo-no-background-1.png" />
-      </head>
+      </head> */}
       <body>
-        <AnimatePresence mode={"wait"}>
-          <motion.div
+        {/* <AnimatePresence mode={"wait"}>
+        <motion.div
             key={router}
             initial="initialState"
             animate="animateState"
@@ -50,10 +55,10 @@ export default function RootLayout({
               },
             }}
             className="bg-[#003F91] w-screen h-screen fixed top-0 left-0 z-50"
-          />
-          <Header />
-          {children}
-        </AnimatePresence>
+          /> */}
+        <Header />
+        {children}
+        {/* </AnimatePresence> */}
       </body>
     </html>
   );

@@ -1,0 +1,39 @@
+---
+priority: 3
+title: "My Shell"
+author: "Bogdan Ciurea"
+description: "A simple shell written in C for the XV6 Operating System."
+type: "University Project"
+---
+
+# My Shell
+
+The next program is intended to simulate a terminal/command shell in the [XV6](https://github.com/mit-pdos/xv6-riscv) Operating System.
+This program was written for a coursework from University.
+
+## How to use
+
+In order to use the code you will have to `git clone https://github.com/mit-pdos/xv6-riscv` on your local machine.
+In the Makefile add the following code on line 130: `$U/_mysh\` .
+Then run `make`, `make qemu`. After the files have been compiled the terminal should display the next text:
+`hart 2 starting`
+`hart 1 starting`
+`init: starting sh`
+`$`
+After this just type `mysh` and the program will run. When the program runs, the shell should show the next characters: `>>>`.
+
+## Usable commands
+
+The program can process more types of commands like:
+
+- simple commands: `ls`, `echo hello`, `wc hello world`, `cd file` or `mkdir file`;
+- Input / output redirections: `echo hello > foo` or `cat < foo`;
+- Pipes: `ls | wc` or `echo hello world | wc`;
+- Multi element pipes: `ls | wc | wc` or `echo hello world | wc | wc`;
+- Non-trivial combinations of pipes and redirection: `ls | wc | wc > foo` (the code will not be able to read from a file and only write to one);
+- `;` between the commands will make more commands from a line
+
+## Disclaimer
+
+The following code is only usable in a XV6 machine although the code is written in a simple type of C.
+Not sure if the program can run in normal C on another machine.

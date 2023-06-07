@@ -1,0 +1,71 @@
+---
+priority: 4
+title: "Malloc & Free Implementation"
+author: "Bogdan Ciurea"
+description: "Project for displaying the implementation of the malloc and free functions in C."
+type: "University Project"
+---
+
+# Malloc & Free Implementation
+
+## Description
+
+This project provides an implementation of the malloc and free functions in C for dynamically allocating and deallocating memory on the heap. The implementation uses the buddy system algorithm and a linked list data structure.
+
+The malloc function allocates memory of a specified size and returns a pointer to the beginning of the block. The free function releases previously allocated memory. The implementation uses the buddy system algorithm, dividing memory into partitions to optimize memory allocation.
+
+A linked list data structure is utilized to track allocated and freed memory blocks. Each node in the linked list represents a memory block and consists of the data and a reference to the next node. The head of the list serves as the entry point for managing the linked list.
+
+The implementation is not thread-safe and assumes a single-threaded environment. It was developed for the XV6 operating system as part of a coursework project. Instructions for running the code in XV6 are provided.
+
+While specifically designed for XV6, with modifications, the code can be adapted for other environments. It provides insights into memory allocation techniques and data structures. Understanding these concepts enables developers to create more efficient software applications.
+
+The next program is intended to simulate a malloc and a free in the [XV6](https://github.com/mit-pdos/xv6-riscv) Operating System.
+
+### XV6
+
+The program is designed to simulate the malloc and free functions within the XV6 operating system. XV6 is a teaching operating system developed at MIT, inspired by Unix Version 6. The program was created as part of a coursework project for a university course, likely involving operating system concepts and memory management.
+
+## How to use
+
+The provided instructions explain how to use the code on a local machine. It involves cloning the XV6 repository, modifying the Makefile, and running the necessary commands to compile and execute the program. Once executed, the program should display test results and demonstrate the functionality of the implemented malloc and free functions.
+
+In order to use the code you will have to `git clone https://github.com/mit-pdos/xv6-riscv` on your local machine.
+In the Makefile add the following code on line 130: `$U/_memory_management\` .
+Then run `make`, `make qemu`. After the files have been compiled the terminal should display the next text:
+`hart 2 starting`
+`hart 1 starting`
+`init: starting sh`
+`$`
+After this just type `memory_management` and the program will run. This should show some of the testing that has been done.
+
+## Explanations
+
+In the next files you can see a type of implementation of the malloc and free function that the C programming language uses.
+These functions will allocate memory in the **heap** of the program.
+The program will keep track of all of the blocks of memory using a linked list of structs presented in the `memory_management.h`.
+
+### Memory Allocation and Deallocation Process
+
+The program follows a specific workflow for **memory allocation** and deallocation:
+
+1. During the first memory allocation, the program utilizes the `sbrk()` function to determine the top of the heap and allocates memory at that location.
+2. If previously allocated memory has been freed and there is enough available space to accommodate the desired block size, the freed space can be divided into two parts to satisfy the allocation request.
+
+When **freeing memory**, the program considers the following cases:
+
+1. If the memory block to be freed is at the top of the heap, the program adjusts the top of the heap by calling `sbrk()` with a negative value, effectively deallocating that block.
+2. If the freed memory block has neighboring free blocks, the program merges these blocks together to create a larger free block. This helps prevent fragmentation and improves memory utilization.
+3. If none of the above cases apply, the block is simply marked as free and available for future allocations.
+
+By adhering to this process, the program effectively manages the allocation and deallocation of memory blocks, optimizing memory usage and minimizing fragmentation.
+
+## Portability
+
+To clarify the portability of the code, please note the following considerations:
+
+- The provided code is specifically designed for the XV6 machine, an operating system inspired by Unix Version 6. It may not be directly usable on other systems without modifications.
+- If you intend to use the code on a different machine, you will need to make certain changes. Firstly, update the headers in the `memory_management.h` file to include `#include <stdio.h>` instead. Additionally, remove the line `#define NULL (void*) 0` since other systems may already have a different definition of `NULL`.
+- Furthermore, the last line of the main function contains the statement `exit(0);`. If you wish to adapt the code for use on another machine, you can change this line to `return 0;`. However, please note that this modification will not affect the functionality of the `_malloc()` and `_free()` functions themselves.
+
+By making these adjustments, you can make the code more compatible with other systems. However, please be aware that further modifications might be required depending on the specific environment and system constraints.

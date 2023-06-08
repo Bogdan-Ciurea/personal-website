@@ -111,7 +111,7 @@ export const ShowWork = ({ element }: { element: DescriptionElement }) => {
 
   return (
     <div
-      className={`flex flex-wrap w-[1040px] max-w-[90%] mx-auto pt-[100px] pb-[100px] items-center text-[#FFFFFC] overflow-x-hidden ${
+      className={`flex flex-wrap w-[1040px] max-w-[90%] mx-auto pt-[100px] pb-[100px] items-center text-[#FFFFFC] ${
         element.imagePosition === "right" ? "flex-row-reverse" : "flex-row"
       }`}
     >
@@ -119,7 +119,7 @@ export const ShowWork = ({ element }: { element: DescriptionElement }) => {
         initial={{ x: -start, opacity: 0 }}
         animate={animateImage}
         className={
-          (windowSize.width < 1000 ? "w-[100%] mx-auto" : "") +
+          (windowSize.width < 1024 ? "w-[100%] mx-auto" : "") +
           (element.imagePosition === "left" ? "lg:pr-[50px]" : "lg:pl-[50px]")
         }
       >
@@ -133,7 +133,7 @@ export const ShowWork = ({ element }: { element: DescriptionElement }) => {
       </motion.div>
 
       <motion.div
-        className="w-[70%] space-y-3 mx-auto"
+        className="w-[90%] md:w-[80%] lg:w-[70%] space-y-3 mx-auto"
         initial={{ x: start, opacity: 0 }}
         animate={animateText}
         ref={ref}

@@ -12,8 +12,12 @@ const Page = async ({ params }: { params: { slug: string } }) => {
       <div className="h-auto pb-[100px] w-[800px] max-w-[90%] mx-auto md:flex md:flex-row-reverse">
         <Link
           href={metadata.link as string}
-          className={`${metrophobic.variable} font-metrophobic flex bg-[#003f91e4] w-[130px] rounded-md items-center justify-center p-2 md:mr-2 md:my-2 h-[40px] text-white
-            mt-[60px] md:mt-[60px] hover:bg-[#003c91] hover:shadow-lg transition-all duration-300
+          className={`${metrophobic.variable} font-metrophobic 
+          flex w-[130px] h-[40px] rounded-md mt-[60px] md:mt-[60px] p-2
+          items-center justify-center md:mr-2 md:my-2 text-white
+          bg-gradient-to-tr from-[#003f91e4] to-blue-500
+          hover:bg-gradient-to-tr hover:from-[#003c91] hover:to-blue-600
+          hover:shadow-lg transition-all duration-300
           `}
           target="_blank"
         >

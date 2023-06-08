@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { robotoMono } from "../data";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { Grade, Module, Year, years } from "../data";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 
 const displayGrade = ({ grade }: { grade: Grade }) => {
   return (
@@ -27,20 +27,50 @@ const displayGrade = ({ grade }: { grade: Grade }) => {
   );
 };
 
-const displayModule = ({ module }: { module: Module }) => {
+const DisplayModule = ({
+  module,
+  index,
+  viewModules,
+}: {
+  module: Module;
+  index: number;
+  viewModules: boolean;
+}) => {
   const finalGrade = Math.round(
     module.grades.reduce((acc, grade) => {
       return acc + grade.grade * (grade.weight / 100);
     }, 0)
   );
 
+  const animation = useAnimation();
+
+  useEffect(() => {
+    if (viewModules) {
+      animation.start({
+        height: "auto",
+        opacity: 1,
+        transition: {
+          delay: index * 0.1,
+          duration: 0.5,
+        },
+      });
+    } else {
+      animation.start({
+        height: "auto",
+        opacity: 0,
+      });
+    }
+  }, [viewModules]);
+
   return (
-    <div
+    <motion.div
+      animate={animation}
+      initial={{ height: "auto", opacity: 0 }}
       key={module.name}
       className=" bg-gray-200 rounded-[25px] my-[20px] shadow-md hover:drop-shadow-xl transition-all"
     >
       {/* Header */}
-      <div className="flex flex-row justify-between items-center px-4 py-2 bg-sky-800 rounded-t-[20px] text-white">
+      <div className="flex flex-row justify-between items-center px-4 py-2 bg-[#003F91] rounded-t-[20px] text-white">
         <h2
           className={`${robotoMono.variable} font-roboto-mono font-weight-400 text-[18px] lg:text-[20px] xl:text-[22px]`}
           style={{ fontWeight: 300 }}
@@ -62,11 +92,11 @@ const displayModule = ({ module }: { module: Module }) => {
           return displayGrade({ grade });
         })}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
-const displayYear = ({ year }: { year: Year }) => {
+const DisplayYear = ({ year }: { year: Year }) => {
   // Calculate the year's grade
   const yearGrade = Math.round(
     year.modules.reduce((acc, module) => {
@@ -89,11 +119,6 @@ const displayYear = ({ year }: { year: Year }) => {
   );
 
   const [viewModules, setViewModules] = useState(false);
-
-  const variants = {
-    open: { opacity: 1, x: 0 },
-    closed: { opacity: 0, y: "50%" },
-  };
 
   return (
     <div
@@ -123,21 +148,13 @@ const displayYear = ({ year }: { year: Year }) => {
           )}
         </button>
       </div>
-      <motion.div
-        className={viewModules ? "" : "hidden"}
-        animate={viewModules ? "open" : "closed"}
-        variants={variants}
-        transition={{
-          duration: 0.5,
-          ease: "easeOut",
-        }}
-      >
+      <div className={viewModules ? "" : "hidden"}>
         <div className=" max-w-[90%] mx-auto">
-          {year.modules.map((module) => {
-            return displayModule({ module });
+          {year.modules.map((module, index) => {
+            return DisplayModule({ module, index, viewModules });
           })}
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };
@@ -154,7 +171,7 @@ export default function Page() {
 
       <div className="w-[1040px] max-w-[90%] mx-auto">
         {years.map((year) => {
-          return displayYear({ year });
+          return DisplayYear({ year });
         })}
       </div>
     </main>

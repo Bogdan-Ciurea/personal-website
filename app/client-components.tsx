@@ -59,20 +59,18 @@ export const AboutMe = () => {
   }, [isInView]);
 
   return (
-    <motion.div
-      className="pt-[114px] pb-[50px] w-[1040px] max-w-[90%] mx-auto"
-      initial={{ x: 300, opacity: 0 }}
-      animate={animate}
-    >
-      <div
-        className={`${robotoMono.variable} font-roboto-mono flex space-x-[20px] text-[46px] xl:text-[64px]`}
+    <div className="pt-[114px] pb-[50px] w-full max-w-[90%] mx-auto overflow-x-hidden">
+      <motion.div
+        className={`${robotoMono.variable} font-roboto-mono flex w-[1250px] mx-auto space-x-[20px] text-[46px] xl:text-[64px]`}
+        initial={{ x: 200, opacity: 0 }}
+        animate={animate}
       >
         <p className="text-[#FFFFFC]" ref={ref}>
           About
         </p>
         <p className="text-red-600">me</p>
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 };
 
@@ -113,7 +111,7 @@ export const ShowWork = ({ element }: { element: DescriptionElement }) => {
 
   return (
     <div
-      className={`flex flex-wrap w-[1040px] max-w-[90%] mx-auto pt-[100px] pb-[100px] items-center text-[#FFFFFC] ${
+      className={`flex flex-wrap w-[1040px] max-w-[90%] mx-auto pt-[100px] pb-[100px] items-center text-[#FFFFFC] overflow-x-hidden ${
         element.imagePosition === "right" ? "flex-row-reverse" : "flex-row"
       }`}
     >

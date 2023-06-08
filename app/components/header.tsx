@@ -3,9 +3,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { robotoMono } from "../data";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { BiMenu } from "react-icons/bi";
+import { IoCloseSharp } from "react-icons/io5";
 
 type Link = {
   name: string;
@@ -13,7 +15,102 @@ type Link = {
   color: string;
 };
 
+// Window size hook
+export const useWindowSize = () => {
+  const [windowSize, setWindowSize] = useState({
+    width: 0 as number,
+    height: 0 as number,
+  });
+
+  useEffect(() => {
+    // only execute all the code below in client side
+    // Handler to call on window resize
+    function handleResize() {
+      // Set window width/height to state
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []); // Empty array ensures that effect is only run on mount
+  return windowSize;
+};
+
+const HeaderElement = ({
+  link,
+  index,
+  isMobile,
+  isHidden,
+  setIsHidden,
+}: {
+  link: Link;
+  index: number;
+  isMobile: boolean;
+  isHidden: boolean;
+  setIsHidden: Dispatch<SetStateAction<boolean>>;
+}) => {
+  const animation = useAnimation();
+
+  useEffect(() => {
+    if (isMobile && !isHidden) {
+      animation.set({
+        height: 0,
+        opacity: 0,
+        x: -100, // Assuming initial position is -10
+      });
+      animation.start({
+        height: "auto",
+        opacity: 1,
+        x: 0,
+        transition: {
+          delay: index * 0.1,
+          duration: 0.5,
+        },
+      });
+    } else {
+      animation.start({
+        height: "auto",
+        opacity: 1,
+      });
+    }
+  }, [isHidden]);
+
+  return (
+    <motion.li
+      key={index}
+      whileHover={isMobile ? {} : { scale: 1.1 }}
+      whileTap={isMobile ? {} : { scale: 0.9 }}
+      animate={isMobile ? animation : {}}
+      className={isMobile ? "my-3" : ""}
+    >
+      <Link
+        href={link.link}
+        className={`${robotoMono.variable} font-roboto-mono hover:underline float-right hover:text-[#F9A826] transition-colors duration-300 sm:text-[18px] lg:text-[24px]`}
+        style={{
+          color: link.color,
+          fontSize: "24px",
+          fontWeight: 400,
+        }}
+        onClick={() => setIsHidden(true)}
+      >
+        {link.name}
+      </Link>
+    </motion.li>
+  );
+};
+
 const Header = () => {
+  const windowSize = useWindowSize();
+
   // Get the pathname of the current page and remove the trailing slash and any query parameters
   // or any paths after the trailing slash.
   const currentPath = usePathname();
@@ -57,6 +154,19 @@ const Header = () => {
   });
 
   const [isHidden, setIsHidden] = useState(true);
+  const [isMobile, setIsMobile] = useState(
+    windowSize.width < 768 ? true : false
+  );
+
+  useEffect(() => {
+    if (windowSize.width < 768 && !isMobile) {
+      setIsMobile(true);
+      console.log("mobile");
+    } else if (windowSize.width >= 768 && isMobile) {
+      setIsMobile(false);
+      console.log("desktop");
+    }
+  }, [windowSize]);
 
   return (
     <motion.nav
@@ -92,31 +202,15 @@ const Header = () => {
             aria-expanded="false"
             onClick={() => setIsHidden(!isHidden)}
           >
-            <span className="sr-only">Open main menu</span>
-            <svg
-              className="w-8 h-8"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-            <svg
-              className="hidden w-6 h-6"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
+            {
+              // Icon when menu is closed.
+              isHidden ? (
+                <BiMenu size={40} />
+              ) : (
+                // Icon when menu is open.
+                <IoCloseSharp size={40} />
+              )
+            }
           </button>
           <div
             className={
@@ -125,29 +219,15 @@ const Header = () => {
             }
           >
             <ul className="flex flex-col mt-4 font-medium md:flex-row md:space-x-[50px] md:mt-0">
-              {links.map((link) => (
-                <motion.li
-                  key={link.name}
-                  whileHover={{
-                    scale: 1.1,
-                  }}
-                  whileTap={{
-                    scale: 0.9,
-                  }}
-                >
-                  <Link
-                    href={link.link}
-                    className={`${robotoMono.variable} font-roboto-mono hover:underline hover:text-[#F9A826] transition-colors duration-300 sm:text-[18px] lg:text-[24px]`}
-                    style={{
-                      color: link.color,
-                      fontSize: "24px",
-                      fontWeight: 400,
-                    }}
-                    onClick={() => setIsHidden(true)}
-                  >
-                    {link.name}
-                  </Link>
-                </motion.li>
+              {links.map((link, index) => (
+                <HeaderElement
+                  key={index}
+                  link={link}
+                  index={index}
+                  isMobile={isMobile}
+                  isHidden={isHidden}
+                  setIsHidden={setIsHidden}
+                />
               ))}
             </ul>
           </div>

@@ -22,9 +22,9 @@ async function Page() {
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          {articles.map((article) => {
-            return <div className="flex flex-col"></div>;
-          })}
+          {/* {articles.map((article) => {
+            return <div className="flex flex-col" key={article.title}></div>;
+          })} */}
         </div>
       )}
     </main>

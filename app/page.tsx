@@ -13,8 +13,58 @@ import {
 } from "./data";
 import { getPostsMetadata } from "@/lib/mdx";
 import Link from "next/link";
+import { BsGithub } from "react-icons/bs";
+import { AiFillFilePdf, AiOutlineLinkedin } from "react-icons/ai";
+import { ImArrowDown2, ImArrowUpRight2 } from "react-icons/im";
 
 const projectMax: number = 3;
+
+const ExternalLinks = () => {
+  return (
+    <div
+      className={`${metrophobic.variable} font-metrophobic md:flex text-white`}
+    >
+      <a
+        href="https://github.com/Bogdan-Ciurea"
+        className="flex w-[130px] rounded-md items-center justify-center p-2 md:mr-2 md:my-2
+        bg-gradient-to-tr from-[#003f91e4] to-blue-500
+        hover:bg-gradient-to-tl hover:from-[#003c91] hover:to-blue-600 hover:shadow-lg transition-all duration-300"
+        target="_blank"
+      >
+        <BsGithub />
+        <div className="flex-grow" />
+        <p>GitHub</p>
+        <ImArrowUpRight2 />
+      </a>
+      <a
+        href="https://www.linkedin.com/in/bogdan-alexandru-ciurea-111974151/"
+        className="flex w-[130px] rounded-md items-center justify-center space-x-2 p-2 my-2 md:m-2
+        bg-gradient-to-t from-[#003f91e4] to-blue-500
+        hover:bg-gradient-to-tl hover:from-[#003c91] hover:to-blue-600 hover:shadow-lg transition-all duration-300"
+        target="_blank"
+      >
+        <AiOutlineLinkedin />
+        <div className="flex-grow" />
+        <p>LinkedIn</p>
+        <ImArrowUpRight2 />
+      </a>
+      <a
+        href="/files/cv-bogdan-ciurea.pdf"
+        download="cv-bogdan-ciurea.pdf"
+        rel="noopener noreferrer"
+        className="flex w-[130px] rounded-md items-center justify-center space-x-2 p-2 md:my-2 md:ml-2
+        bg-gradient-to-tl from-[#003f91e4] to-blue-500
+        hover:bg-gradient-to-tl hover:from-[#003c91] hover:to-blue-600 hover:shadow-lg transition-all duration-300"
+        aria-label="Download CV"
+      >
+        <AiFillFilePdf />
+        <div className="flex-grow" />
+        <p>CV</p>
+        <ImArrowDown2 />
+      </a>
+    </div>
+  );
+};
 
 // Components
 const FirstParagraph = () => {
@@ -55,6 +105,7 @@ const FirstParagraph = () => {
           architecture challenges and I&apos;m always looking to improve my
           skills.
         </p>
+        <ExternalLinks />
       </div>
     </div>
   );

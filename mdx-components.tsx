@@ -46,6 +46,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <a
         href={href}
         className="text-[#F9A826] hover:text-[#F9A826] transition-colors duration-300"
+        target="_blank"
       >
         {children}
       </a>
@@ -66,13 +67,16 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     li: ({ children }) => <li className="my-2">{children}</li>,
     table: ({ children }) => (
-      <table className="table-auto w-full">{children}</table>
+      console.log(children),
+      (<table className="table-auto w-full">{children}</table>)
     ),
     th: ({ children }) => (
-      <th className="border border-[#F9A826] px-4 py-2">{children}</th>
+      console.log(children),
+      (<th className="border border-[#F9A826] px-4 py-2">{children}</th>)
     ),
     td: ({ children }) => (
-      <td className="border border-[#F9A826] px-4 py-2">{children}</td>
+      console.log(children),
+      (<td className="border border-[#F9A826] px-4 py-2">{children}</td>)
     ),
     pre: ({ children }) => (
       <pre className="bg-[#b94141] rounded-md p-4">{children}</pre>

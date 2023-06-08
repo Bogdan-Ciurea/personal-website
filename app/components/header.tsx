@@ -43,11 +43,11 @@ const Header = () => {
       link: "/blog",
       color: "#000",
     },
-    {
-      name: "Contact",
-      link: "/contact",
-      color: "#000",
-    },
+    // {
+    //   name: "Contact",
+    //   link: "/contact",
+    //   color: "#000",
+    // },
   ];
 
   links.map((link) => {
@@ -56,7 +56,7 @@ const Header = () => {
     }
   });
 
-  const [isHidden, setIsHidden] = useState(false);
+  const [isHidden, setIsHidden] = useState(true);
 
   return (
     <motion.nav
@@ -143,7 +143,7 @@ const Header = () => {
                       fontSize: "24px",
                       fontWeight: 400,
                     }}
-                    onClick={() => setIsHidden(!isHidden)}
+                    onClick={() => setIsHidden(true)}
                   >
                     {link.name}
                   </Link>

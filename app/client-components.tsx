@@ -4,7 +4,7 @@ import { josefinSans, metrophobic, robotoMono, technologies } from "./data";
 import { motion, useAnimation, useInView } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { use, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DescriptionElement } from "./data";
 
 // Window size hook

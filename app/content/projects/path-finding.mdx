@@ -54,6 +54,17 @@ In the current state of the program will not make the path between the two point
 
 If the graph given in the `Final_Map.map` file has a negative weight link, Dijkstra’s algorithm will not work as intended. Also, if there is a negative weight cycle, Bellman-Ford’s Algorithm will also not work properly.
 
+### Portability with MacOS and M1 chip
+
+The program has not been developed and tested on a Windows machine. After that, I had also tested the program on a Linux (Feng) machine and it worked as intended.
+After that I had tested the program on a MacOS machine and it, as expected, had some issues.
+For me, the program had some issues with the SDL library when I tried to run it on **Mac M1** chip.
+
+Example of the error:
+
+![GIF 1](/content/projects/path-finding/path-finding-gif-1.gif)
+![GIF 2](/content/projects/path-finding/path-finding-gif-2.gif)
+
 ## First command
 
 When the program is first launched the user has one option: to type the file's name, in this case `Final_Map.map`.

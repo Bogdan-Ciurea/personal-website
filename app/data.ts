@@ -785,7 +785,7 @@ export const years: Year[] = [
           },
           {
             name: "Coursework 2",
-            grade: 0,
+            grade: 90,
             weight: 15,
           },
           {

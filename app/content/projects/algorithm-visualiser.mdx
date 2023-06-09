@@ -44,13 +44,17 @@ In order to run the project you will use the next commands in the repo's route, 
 `cmake .. && make`
 `./visualiser`
 
-CMake will automatically download Raylib from GitHub when building the project.
+CMake will automatically download RayLib from GitHub when building the project.
 
 ## How to Use the Project
 
 After running the compiler and launching project (as mentioned above) you should be ready to visualize the algorithms.
 The project has a main interface, from where you will be able to select from 4 different options:
 `Sorting Algorithms`, `Search Algorithms`, `Graph Algorithms` and `Trees Algorithms`.
+
+Main menu:
+
+![Main menu](/content/projects/algorithm-visualiser/main-menu-image.png)
 
 ### Sorting Algorithms
 
@@ -65,11 +69,19 @@ This page will have the following features:
 - a `drop-down menu`, from which you can select the desired algorithm;
 - the main drawing canvas (under the header), in which all the pillars will be animated
 
+Results:
+
+![Image 1](/content/projects/algorithm-visualiser/algorithm-sort.gif)
+
 ### Search Algorithms
 
 As presented above, the `Search Algorithms` page will contain 5 different algorithms. This page will have the same functionality and buttons to the one containing the `Sorting Algorithms`. This page will also contain another button that will sort everything, in order to provide an example of what happens when the array is not sorted.
 
-### Sorting Algorithms
+Results:
+
+![Image 2](/content/projects/algorithm-visualiser/algorithm-search.gif)
+
+### Path Finding Algorithms
 
 As presented above, the `Graph Algorithms` page will contain 7 different algorithms. There will also be a starting graph that should be enough for starting to play with the algorithms.
 This page will have the following features:
@@ -83,8 +95,6 @@ This page will have the following features:
 - a `back button`, that will take the user back to the main menu;
 - a `drop-down menu`, from which you can select the desired algorithm;
 - the main drawing canvas (under the header), in which everything will be animated
-
-Keep in mind that, even if some algorithms don't work with some graphs (i.e.: Dijkstra with a graph that has a negative weight edge), my implementation will allow such cases to exist in order to better understand the error. A warning will appear wo that the user is informed about this fact.
 
 ### Trees Algorithms
 

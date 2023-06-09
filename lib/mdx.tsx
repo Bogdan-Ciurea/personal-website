@@ -39,7 +39,7 @@ export const GetMDXFile = async (
     });
 
     return {
-      metadata: { ...frontmatter, slug },
+      metadata: { ...frontmatter, slug, mtime: fs.statSync(filePath).mtime },
       content,
     };
   } catch (error) {

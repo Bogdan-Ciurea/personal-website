@@ -203,7 +203,7 @@ export const ShowTechnologies = () => {
               className={`${
                 selected === index
                   ? "bg-[#FFFFFC] text-[#003F91] border-[#003F91] border-2"
-                  : "bg-[#003F91] text-[#FFFFFC] hover:bg-[#003376]"
+                  : "text-[#FFFFFC] bg-gradient-to-tr from-[#003f91e4] to-blue-500 hover:bg-gradient-to-tr hover:from-[#003c91] hover:to-blue-600 hover:shadow-lg transition-all duration-300"
               } ${
                 metrophobic.variable
               } font-metrophobic font-weight-400 text-[24px] px-[20px] py-[10px] rounded-[10px] m-[10px]`}
@@ -220,7 +220,7 @@ export const ShowTechnologies = () => {
       </div>
 
       <motion.div
-        className="w-[100%] min-h-[300px] mt-[65px] bg-[#F8F8F8] rounded-2xl flex flex-wrap justify-around"
+        className="w-[100%] min-h-[300px] mt-[65px] bg-[#F8F8F8] rounded-2xl flex flex-wrap justify-around shadow-lg"
         variants={{
           initial: {
             x: 300 * -(lastSelected - selected),
@@ -256,6 +256,7 @@ export const ShowTechnologies = () => {
                 alt={technology.imageAlt}
                 width={windowSize.width < 768 ? 50 : 100}
                 height={windowSize.width < 768 ? 50 : 100}
+                className="drop-shadow-lg"
               />
               <p
                 className={`${josefinSans.className} font-josefin-sans font-weight-200 text-center pt-[10px]`}

@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { DescriptionElement } from "./data";
+import { ThemeProvider, useTheme } from "next-themes";
 
 // Window size hook
 export const useWindowSize = () => {
@@ -190,7 +191,7 @@ export const ShowTechnologies = () => {
       >
         Technologies
       </h1>
-      <div className="flex flex-wrap justify-center space-x-[40px]">
+      <div className="flex flex-col items-center md:flex-wrap md:flex-row md:justify-center md:space-x-40px ">
         {technologies.map((category, index) => {
           return (
             <motion.button
@@ -202,8 +203,8 @@ export const ShowTechnologies = () => {
               }}
               className={`${
                 selected === index
-                  ? "bg-[#FFFFFC] text-[#003F91] border-[#003F91] border-2"
-                  : "text-[#FFFFFC] bg-gradient-to-tr from-[#003f91e4] to-blue-500 hover:bg-gradient-to-tr hover:from-[#003c91] hover:to-blue-600 hover:shadow-lg transition-all duration-300"
+                  ? "bg-[#FFFFFC] text-[#003F91] border-[#003F91] border-2 dark:bg-blue-400  dark:border-0"
+                  : "text-[#FFFFFC] bg-gradient-to-tr from-[#003f91e4] to-blue-500 hover:bg-gradient-to-tr hover:from-[#003c91] hover:to-blue-600 hover:shadow-lg transition-all duration-300 dark:from-[#002454e4] dark:to-blue-800 dark:hover:from-[#002454] dark:hover:to-blue-900"
               } ${
                 metrophobic.variable
               } font-metrophobic font-weight-400 text-[24px] px-[20px] py-[10px] rounded-[10px] m-[10px]`}
@@ -220,7 +221,7 @@ export const ShowTechnologies = () => {
       </div>
 
       <motion.div
-        className="w-[100%] min-h-[300px] mt-[65px] bg-[#F8F8F8] rounded-2xl flex flex-wrap justify-around shadow-lg"
+        className="w-[100%] min-h-[300px] mt-[65px] bg-[#F8F8F8] dark:bg-[#2e2e2e] rounded-2xl flex flex-wrap justify-around shadow-lg"
         variants={{
           initial: {
             x: 300 * -(lastSelected - selected),
@@ -259,7 +260,7 @@ export const ShowTechnologies = () => {
                 className="drop-shadow-lg"
               />
               <p
-                className={`${josefinSans.className} font-josefin-sans font-weight-200 text-center pt-[10px]`}
+                className={`${josefinSans.className} font-josefin-sans font-weight-200 text-center pt-[10px] dark:text-[#FFFFFC]`}
                 style={{ fontSize: "20px" }}
               >
                 {technology.name}
@@ -291,5 +292,17 @@ export const LinkToProjects = () => {
         See all projects &rarr;
       </Link>
     </motion.div>
+  );
+};
+
+export const ApplyTheme = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <ThemeProvider
+      disableTransitionOnChange
+      attribute="class"
+      defaultTheme="system"
+    >
+      {children}
+    </ThemeProvider>
   );
 };

@@ -2,6 +2,7 @@
 
 import "./globals.css";
 import Header from "./components/header";
+import { ApplyTheme } from "./client-components";
 // import { motion, AnimatePresence } from "framer-motion";
 // import { usePathname } from "next/navigation";
 
@@ -29,7 +30,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/logo-no-background-1.png" />
       </head> */}
-      <body>
+      <body className="bg-[#edefecd1] dark:bg-[#0f1624] dark:text-gray-200">
         {/* <AnimatePresence mode={"wait"}>
         <motion.div
             key={router}
@@ -56,8 +57,12 @@ export default function RootLayout({
             }}
             className="bg-[#003F91] w-screen h-screen fixed top-0 left-0 z-50"
           /> */}
-        <Header />
-        {children}
+        <ApplyTheme>
+          <Header />
+          {children}
+        </ApplyTheme>
+        {/* <Header />
+        {children} */}
         {/* </AnimatePresence> */}
       </body>
     </html>

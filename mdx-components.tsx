@@ -12,27 +12,21 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     // Allows customizing built-in components, e.g. to add styling.
     h1: ({ children }) => (
       <h1
-        className={`${robotoMono.variable} font-roboto-mono text-[30px] lg:text-[40px] my-5
-        dark:text-[#F9A826] dark:font-roboto-mono dark:font-weight-400 dark:text-[30px] dark:lg:text-[40px] dark:my-5
-        `}
+        className={`${robotoMono.variable} font-roboto-mono text-[30px] lg:text-[40px] my-5 dark:text-white`}
       >
         {children}
       </h1>
     ),
     h2: ({ children }) => (
       <h2
-        className={`${metrophobic.className} font-metrophobic text-[30px] lg:text-[40px] my-5
-        dark:text-[#F9A826] dark:font-metrophobic dark:font-weight-400 dark:text-[30px] dark:lg:text-[40px] dark:my-5
-        `}
+        className={`${metrophobic.className} font-metrophobic text-[30px] lg:text-[40px] my-5 dark:text-white`}
       >
         {children}
       </h2>
     ),
     h3: ({ children }) => (
       <h3
-        className={`${josefinSans.className} font-josefin-sans text-[20px] lg:text-[30px] my-5
-        dark:text-[#F9A826] dark:font-josefin-sans
-        `}
+        className={`${josefinSans.className} font-josefin-sans text-[20px] lg:text-[30px] my-5 dark:text-white`}
         style={{ fontWeight: 700 }}
       >
         {children}
@@ -41,9 +35,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     p: ({ children }) => (
       <p
         className={`
-      ${josefinSans.className} font-josefin-sans text-[20px] lg:text-[30px] my-5 text-justify
-      dark:text-white dark:font-josefin-sans
-    `}
+      ${josefinSans.className} font-josefin-sans text-[20px] lg:text-[30px] my-5 text-justify dark:text-white`}
         style={{ fontWeight: 300 }}
       >
         {children}
@@ -53,7 +45,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <a
         href={href}
         className="text-[#F9A826] hover:text-[#F9A826] transition-colors duration-300
-        dark:text-[#F9A826] dark:hover:text-[#F9A826] dark:transition-colors dark:duration-300
+        dark:text-white dark:hover:text-[#F9A826] dark:transition-colors dark:duration-300
         "
         target="_blank"
       >

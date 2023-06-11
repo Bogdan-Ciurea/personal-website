@@ -8,6 +8,7 @@ import { robotoMono } from "../data";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { BiMenu } from "react-icons/bi";
 import { IoCloseSharp } from "react-icons/io5";
+import { useTheme } from "next-themes";
 
 type Link = {
   name: string;
@@ -48,12 +49,14 @@ export const useWindowSize = () => {
 const HeaderElement = ({
   link,
   index,
+  pathname,
   isMobile,
   isHidden,
   setIsHidden,
 }: {
   link: Link;
   index: number;
+  pathname: string;
   isMobile: boolean;
   isHidden: boolean;
   setIsHidden: Dispatch<SetStateAction<boolean>>;
@@ -94,9 +97,15 @@ const HeaderElement = ({
     >
       <Link
         href={link.link}
-        className={`${robotoMono.variable} font-roboto-mono hover:underline float-right hover:text-[#F9A826] transition-colors duration-300 sm:text-[18px] lg:text-[24px]`}
+        className={`${
+          robotoMono.variable
+        } font-roboto-mono hover:underline float-right
+        transition-colors duration-300 sm:text-[18px] lg:text-[24px] ${
+          link.link === pathname
+            ? "text-[#00000080] dark:text-gray-500"
+            : "text-[#000000] dark:text-white"
+        }`}
         style={{
-          color: link.color,
           fontSize: "24px",
           fontWeight: 400,
         }}
@@ -123,22 +132,24 @@ const Header = () => {
     pathname = currentPath;
   }
 
+  const theme = useTheme();
+
   // Style the current page's link in the header.
   const links: Link[] = [
     {
       name: "Home",
       link: "/",
-      color: "#000",
+      color: theme.resolvedTheme === "dark" ? "#fff" : "#000",
     },
     {
       name: "Projects",
       link: "/projects",
-      color: "#000",
+      color: theme.resolvedTheme === "dark" ? "#fff" : "#000",
     },
     {
       name: "Blog",
       link: "/blog",
-      color: "#000",
+      color: theme.resolvedTheme === "dark" ? "#fff" : "#000",
     },
     // {
     //   name: "Contact",
@@ -146,12 +157,6 @@ const Header = () => {
     //   color: "#000",
     // },
   ];
-
-  links.map((link) => {
-    if (link.link === pathname) {
-      link.color = "#00000080";
-    }
-  });
 
   const [isHidden, setIsHidden] = useState(true);
   const [isMobile, setIsMobile] = useState(
@@ -161,10 +166,8 @@ const Header = () => {
   useEffect(() => {
     if (windowSize.width < 768 && !isMobile) {
       setIsMobile(true);
-      console.log("mobile");
     } else if (windowSize.width >= 768 && isMobile) {
       setIsMobile(false);
-      console.log("desktop");
     }
   }, [windowSize]);
 
@@ -223,6 +226,7 @@ const Header = () => {
                 <HeaderElement
                   key={index}
                   link={link}
+                  pathname={pathname}
                   index={index}
                   isMobile={isMobile}
                   isHidden={isHidden}

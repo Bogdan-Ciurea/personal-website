@@ -23,7 +23,7 @@ const Project = ({
   description: string;
 }) => {
   return (
-    <div className="flex flex-col h-min[400px] h-auto bg-[#F8F8F8] rounded-xl  border-gray-800 border-2">
+    <div className="flex flex-col h-min[400px] h-auto bg-[#F8F8F8] dark:bg-[#2e2e2ea4] rounded-xl  border-gray-800 border-2">
       <h1
         className={`${robotoMono.variable} font-roboto-mono font-weight-400 text-[30px] lg:text-[40px] m-5`}
       >

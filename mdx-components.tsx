@@ -12,21 +12,27 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     // Allows customizing built-in components, e.g. to add styling.
     h1: ({ children }) => (
       <h1
-        className={`${robotoMono.variable} font-roboto-mono text-[30px] lg:text-[40px] my-5`}
+        className={`${robotoMono.variable} font-roboto-mono text-[30px] lg:text-[40px] my-5
+        dark:text-[#F9A826] dark:font-roboto-mono dark:font-weight-400 dark:text-[30px] dark:lg:text-[40px] dark:my-5
+        `}
       >
         {children}
       </h1>
     ),
     h2: ({ children }) => (
       <h2
-        className={`${metrophobic.className} font-metrophobic text-[30px] lg:text-[40px] my-5`}
+        className={`${metrophobic.className} font-metrophobic text-[30px] lg:text-[40px] my-5
+        dark:text-[#F9A826] dark:font-metrophobic dark:font-weight-400 dark:text-[30px] dark:lg:text-[40px] dark:my-5
+        `}
       >
         {children}
       </h2>
     ),
     h3: ({ children }) => (
       <h3
-        className={`${josefinSans.className} font-josefin-sans text-[20px] lg:text-[30px] my-5`}
+        className={`${josefinSans.className} font-josefin-sans text-[20px] lg:text-[30px] my-5
+        dark:text-[#F9A826] dark:font-josefin-sans
+        `}
         style={{ fontWeight: 700 }}
       >
         {children}
@@ -36,6 +42,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <p
         className={`
       ${josefinSans.className} font-josefin-sans text-[20px] lg:text-[30px] my-5 text-justify
+      dark:text-white dark:font-josefin-sans
     `}
         style={{ fontWeight: 300 }}
       >
@@ -45,27 +52,37 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     a: ({ children, href }) => (
       <a
         href={href}
-        className="text-[#F9A826] hover:text-[#F9A826] transition-colors duration-300"
+        className="text-[#F9A826] hover:text-[#F9A826] transition-colors duration-300
+        dark:text-[#F9A826] dark:hover:text-[#F9A826] dark:transition-colors dark:duration-300
+        "
         target="_blank"
       >
         {children}
       </a>
     ),
+    strong: ({ children }) => (
+      <strong
+        className={`${robotoMono.className} font-roboto-mono text-[14px] lg:text-[18px] dark:text-white
+      `}
+      >
+        {children}
+      </strong>
+    ),
     ul: ({ children }) => (
       <ul
-        className={`${josefinSans.className} font-josefin-sans list-disc list-inside`}
+        className={`${josefinSans.className} font-josefin-sans list-disc list-inside dark:text-yellow-100`}
       >
         {children}
       </ul>
     ),
     ol: ({ children }) => (
       <ol
-        className={`${josefinSans.className} font-josefin-sans list-disc list-inside`}
+        className={`${josefinSans.className} font-josefin-sans list-disc list-inside dark:text-white`}
       >
         {children}
       </ol>
     ),
-    li: ({ children }) => <li className="my-2">{children}</li>,
+    li: ({ children }) => <li className="my-2 dark:text-white">{children}</li>,
     table: ({ children }) => (
       console.log(children),
       (<table className="table-auto w-full">{children}</table>)
@@ -83,7 +100,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     code: ({ children }) => (
       <code
-        className={`${robotoMono.className} font-roboto-mono text-[14px] lg:text-[18px]
+        className={`${robotoMono.className} font-roboto-mono text-[14px] lg:text-[18px] dark:text-white
       `}
       >
         {children}

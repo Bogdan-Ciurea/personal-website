@@ -18,6 +18,7 @@ const Page = async ({ params }: { params: { slug: string } }) => {
           bg-gradient-to-tr from-[#003f91e4] to-blue-500
           hover:bg-gradient-to-tr hover:from-[#003c91] hover:to-blue-600
           hover:shadow-lg transition-all duration-300
+          dark:from-[#002454e4] dark:to-blue-800 dark:hover:from-[#002454] dark:hover:to-blue-900
           `}
           target="_blank"
         >

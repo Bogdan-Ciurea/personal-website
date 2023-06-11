@@ -28,7 +28,8 @@ const ExternalLinks = () => {
         href="https://github.com/Bogdan-Ciurea"
         className="flex w-[130px] rounded-md items-center justify-center p-2 md:mr-2 md:my-2
         bg-gradient-to-r lg:bg-gradient-to-t from-[#003f91e4] to-blue-500
-        hover:bg-gradient-to-r lg:hover:bg-gradient-to-t hover:from-[#003c91] hover:to-blue-600 hover:shadow-lg transition-all duration-300"
+        hover:bg-gradient-to-r lg:hover:bg-gradient-to-t hover:from-[#003c91] hover:to-blue-600 hover:shadow-lg transition-all duration-300
+        dark:from-[#002454e4] dark:to-blue-800 dark:hover:from-[#002454] dark:hover:to-blue-900"
         target="_blank"
       >
         <BsGithub />
@@ -40,7 +41,8 @@ const ExternalLinks = () => {
         href="https://www.linkedin.com/in/bogdan-alexandru-ciurea-111974151/"
         className="flex w-[130px] rounded-md items-center justify-center space-x-2 p-2 my-2 md:m-2
         bg-gradient-to-r lg:bg-gradient-to-t from-[#003f91e4] to-blue-500
-        hover:bg-gradient-to-r lg:hover:bg-gradient-to-t hover:from-[#003c91] hover:to-blue-600 hover:shadow-lg transition-all duration-300"
+        hover:bg-gradient-to-r lg:hover:bg-gradient-to-t hover:from-[#003c91] hover:to-blue-600 hover:shadow-lg transition-all duration-300
+        dark:from-[#002454e4] dark:to-blue-800 dark:hover:from-[#002454] dark:hover:to-blue-900"
         target="_blank"
       >
         <AiOutlineLinkedin />
@@ -54,7 +56,8 @@ const ExternalLinks = () => {
         rel="noopener noreferrer"
         className="flex w-[130px] rounded-md items-center justify-center space-x-2 p-2 md:my-2 md:ml-2
         bg-gradient-to-r lg:bg-gradient-to-t from-[#003f91e4] to-blue-500
-        hover:bg-gradient-to-r lg:hover:bg-gradient-to-t hover:from-[#003c91] hover:to-blue-600 hover:shadow-lg transition-all duration-300"
+        hover:bg-gradient-to-r lg:hover:bg-gradient-to-t hover:from-[#003c91] hover:to-blue-600 hover:shadow-lg transition-all duration-300
+        dark:from-[#002454e4] dark:to-blue-800 dark:hover:from-[#002454] dark:hover:to-blue-900"
         aria-label="Download CV"
       >
         <AiFillFilePdf />

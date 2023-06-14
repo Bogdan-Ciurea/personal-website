@@ -1,7 +1,7 @@
 // "use client";
 
 import "./globals.css";
-import Header from "./components/header";
+import Header from "../components/header";
 import { ApplyTheme } from "./client-components";
 // import { motion, AnimatePresence } from "framer-motion";
 // import { usePathname } from "next/navigation";

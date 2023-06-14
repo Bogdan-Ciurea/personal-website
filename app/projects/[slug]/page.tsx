@@ -7,6 +7,16 @@ import { ImArrowUpRight2 } from "react-icons/im";
 const Page = async ({ params }: { params: { slug: string } }) => {
   const { metadata, content } = await GetMDXFile(params.slug, "projects");
 
+  if (content === null) {
+    return (
+      <main>
+        <div className="pt-200px text-center">
+          <h1>Article not found</h1>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main>
       <div className="h-auto pb-[100px] w-[800px] max-w-[90%] mx-auto md:flex md:flex-row-reverse">
@@ -27,7 +37,9 @@ const Page = async ({ params }: { params: { slug: string } }) => {
           <p>GitHub</p>
           <ImArrowUpRight2 className="ml-2" />
         </Link>
-        <article className="prose mt-10 w-[100%]">{content}</article>
+        <article className="prose mt-10 w-[100%] prose-a:text-[#F9A826] prose-headings:text-[#F9A826]">
+          {content}
+        </article>
       </div>
     </main>
   );

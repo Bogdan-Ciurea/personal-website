@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, useAnimation } from "framer-motion";
-import { robotoMono } from "../data";
+import { robotoMono } from "../app/data";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { BiMenu } from "react-icons/bi";
 import { IoCloseSharp } from "react-icons/io5";

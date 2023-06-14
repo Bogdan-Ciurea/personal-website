@@ -8,6 +8,8 @@ const colourByType = (type: string) => {
       return "bg-[#50905190]";
     case "Personal Project":
       return "bg-[#F2A90090]";
+    default:
+      return "bg-[#003F9190]";
   }
 };
 

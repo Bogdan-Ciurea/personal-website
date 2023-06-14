@@ -12,21 +12,21 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     // Allows customizing built-in components, e.g. to add styling.
     h1: ({ children }) => (
       <h1
-        className={`${robotoMono.variable} font-roboto-mono text-[30px] lg:text-[40px] my-5 dark:text-white`}
+        className={`${robotoMono.variable} font-roboto-mono text-[30px] lg:text-[40px] my-5`}
       >
         {children}
       </h1>
     ),
     h2: ({ children }) => (
       <h2
-        className={`${metrophobic.className} font-metrophobic text-[30px] lg:text-[40px] my-5 dark:text-white`}
+        className={`${metrophobic.className} font-metrophobic text-[30px] lg:text-[40px] my-5`}
       >
         {children}
       </h2>
     ),
     h3: ({ children }) => (
       <h3
-        className={`${josefinSans.className} font-josefin-sans text-[20px] lg:text-[30px] my-5 dark:text-white`}
+        className={`${josefinSans.className} font-josefin-sans text-[20px] lg:text-[30px] my-5`}
         style={{ fontWeight: 700 }}
       >
         {children}
@@ -42,13 +42,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </p>
     ),
     a: ({ children, href }) => (
-      <a
-        href={href}
-        className="text-[#F9A826] hover:text-[#F9A826] transition-colors duration-300
-        dark:text-white dark:hover:text-[#F9A826] dark:transition-colors dark:duration-300
-        "
-        target="_blank"
-      >
+      <a href={href} className="transition-colors duration-300" target="_blank">
         {children}
       </a>
     ),

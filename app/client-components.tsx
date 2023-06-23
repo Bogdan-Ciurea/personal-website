@@ -221,7 +221,8 @@ export const ShowTechnologies = () => {
       </div>
 
       <motion.div
-        className="w-[100%] min-h-[300px] mt-[65px] bg-[#F8F8F8] dark:bg-[#2e2e2e] rounded-2xl flex flex-wrap justify-around shadow-lg"
+        className="w-[100%] min-h-[300px] mt-[65px] bg-[#F8F8F8] rounded-2xl flex flex-wrap justify-around shadow-lg
+        dark:bg-gradient-to-br dark:from-[#002454e4] dark:to-[#003F91]"
         variants={{
           initial: {
             x: 300 * -(lastSelected - selected),

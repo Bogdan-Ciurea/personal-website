@@ -35,11 +35,11 @@ const ExternalLinks = () => {
         <BsGithub />
         <div className="flex-grow" />
         <p>GitHub</p>
-        <ImArrowUpRight2 />
+        <ImArrowUpRight2 className="ml-2" />
       </a>
       <a
         href="https://www.linkedin.com/in/bogdan-alexandru-ciurea-111974151/"
-        className="flex w-[130px] rounded-md items-center justify-center space-x-2 p-2 my-2 md:m-2
+        className="flex w-[130px] rounded-md items-center justify-center p-2 my-2 md:m-2
         bg-gradient-to-r lg:bg-gradient-to-t from-[#003f91e4] to-blue-500
         hover:bg-gradient-to-r lg:hover:bg-gradient-to-t hover:from-[#003c91] hover:to-blue-600 hover:shadow-lg transition-all duration-300
         dark:from-[#002454e4] dark:to-blue-800 dark:hover:from-[#002454] dark:hover:to-blue-900"
@@ -48,13 +48,13 @@ const ExternalLinks = () => {
         <AiOutlineLinkedin />
         <div className="flex-grow" />
         <p>LinkedIn</p>
-        <ImArrowUpRight2 />
+        <ImArrowUpRight2 className="h-[100%] ml-2" />
       </a>
       <a
         href="/files/cv-bogdan-ciurea.pdf"
         download="cv-bogdan-ciurea.pdf"
         rel="noopener noreferrer"
-        className="flex w-[130px] rounded-md items-center justify-center space-x-2 p-2 md:my-2 md:ml-2
+        className="flex w-[130px] rounded-md items-center justify-center p-2 md:my-2 md:ml-2
         bg-gradient-to-r lg:bg-gradient-to-t from-[#003f91e4] to-blue-500
         hover:bg-gradient-to-r lg:hover:bg-gradient-to-t hover:from-[#003c91] hover:to-blue-600 hover:shadow-lg transition-all duration-300
         dark:from-[#002454e4] dark:to-blue-800 dark:hover:from-[#002454] dark:hover:to-blue-900"
@@ -63,7 +63,8 @@ const ExternalLinks = () => {
         <AiFillFilePdf />
         <div className="flex-grow" />
         <p>CV</p>
-        <ImArrowDown2 />
+        {/* <ImArrowDown2 className="h-[100%] ml-2" /> */}
+        <ImArrowUpRight2 className="h-[100%] ml-2" />
       </a>
     </div>
   );
@@ -102,11 +103,11 @@ const FirstParagraph = () => {
           className={`${josefinSans.className} font-josefin-sans`}
           style={{ fontSize: "24px" }}
         >
-          I&apos;m a Software Engineer who loves to learn new things and
-          challenge myself. I&apos;m currently studying Computer Science at the
-          University of Leeds. I have a passion for C++ and software
-          architecture challenges and I&apos;m always looking to improve my
-          skills.
+          Computer Science student at the University of Leeds, passionate about
+          software architecture, C++, and web applications. With specialized
+          skills in these areas, I aim to contribute to robust software
+          solutions, delivering exceptional results through attention to detail
+          and continuous professional growth in IT.
         </p>
         <ExternalLinks />
       </div>

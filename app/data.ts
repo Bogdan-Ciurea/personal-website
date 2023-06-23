@@ -213,7 +213,7 @@ export const descriptionElements: DescriptionElement[] = [
   {
     title: "University",
     subtitle: "University of Leeds: MEng & BSc Computer Science",
-    text: "Finished my BSc in Computer Science with a First Class Honours (>70%) and I am currently studying for my MEng in Computer Science. The modules I have studied include: Software Engineering, Algorithms, Data Structures, Computer Graphics, Artificial Intelligence, Cryptography, and many more.",
+    text: "Successfully completed my BSc in Computer Science with First Class Honours (>70%) and I am currently pursuing my MEng in Computer Science. Throughout my academic journey, I have gained expertise in various subjects such as Software Engineering, Algorithms, Data Structures, Computer Graphics, Artificial Intelligence, Cryptography, and much more.",
     image: "/logo-leeds.png",
     imageAlt: "logo leeds",
     imageWidth: 220,
@@ -224,12 +224,23 @@ export const descriptionElements: DescriptionElement[] = [
   {
     title: "Work",
     subtitle: "R Systems: Junior Software Engineer",
-    text: "I am currently working as a Junior Software Engineer at R Systems, a company that provides outsourcing services in the telecom industry. I am currently maintaining and developing a Java + Rhino solution for a client in Netherlands. My responsibilities include: maintaining the current nodes and developing new ones, writing documentation, and providing support for the client.",
+    text: "As a Junior Software Engineer at R Systems, a reputable company specializing in outsourcing services within the telecom industry, I am currently engaged in the maintenance and development of a Java + Rhino solution for a valued client based in the Netherlands. My core responsibilities revolve around ensuring the smooth operation of existing nodes, creating new ones, documenting the software, and providing dedicated client support.",
     image: "/logo-rsystems.png",
     imageAlt: "logo RSystems",
     imageWidth: 220,
     imageHeight: 173 * (220 / 288),
     imagePosition: "right",
+    link: null,
+  },
+  {
+    title: "Work",
+    subtitle: "Javery: Software Engineer",
+    text: "Taken the lead in making important architecture decisions for software projects, ensuring they perform well, can handle growth, and are reliable. I have closely collaborated with the frontend team to create strong backend systems and databases, making sure everything works together smoothly. I have also learned Next.js and the T3 stack to improve how we develop web applications. By carefully understanding our clients' needs, I have turned their requirements into practical software solutions that go beyond their expectations.",
+    image: "/logo-javery.png",
+    imageAlt: "logo Javery",
+    imageWidth: 220,
+    imageHeight: 220,
+    imagePosition: "left",
     link: null,
   },
 ];

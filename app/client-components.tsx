@@ -1,12 +1,19 @@
 "use client";
 
 import { josefinSans, metrophobic, robotoMono, technologies } from "./data";
-import { motion, useAnimation, useInView } from "framer-motion";
+import {
+  motion,
+  useAnimation,
+  useInView,
+  useScroll,
+  useViewportScroll,
+} from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { DescriptionElement } from "./data";
-import { ThemeProvider, useTheme } from "next-themes";
+import { ThemeProvider } from "next-themes";
+import { FaAngleUp } from "react-icons/fa";
 
 // Window size hook
 export const useWindowSize = () => {
@@ -305,5 +312,48 @@ export const ApplyTheme = ({ children }: { children: React.ReactNode }) => {
     >
       {children}
     </ThemeProvider>
+  );
+};
+
+export const ToTopButton = () => {
+  const controls = useAnimation();
+  const { scrollYProgress } = useScroll();
+
+  useEffect(() => {
+    const threshold = 0.1;
+
+    const handleScroll = () => {
+      if (scrollYProgress.get() >= threshold) {
+        controls.start({ opacity: 1 }); // Arrow is visible
+      } else {
+        controls.start({ opacity: 0 }); // Arrow is hidden
+      }
+    };
+
+    handleScroll(); // Handle initial scroll position
+
+    const unsubscribe = scrollYProgress.onChange(handleScroll); // Subscribe to scroll position changes
+
+    return () => {
+      unsubscribe(); // Unsubscribe from scroll position changes when component is unmounted
+    };
+  }, [controls, scrollYProgress]);
+
+  return (
+    <motion.div
+      className="fixed bottom-0 right-0 mr-[20px] mb-[20px]"
+      animate={controls}
+      initial={{ opacity: 0 }}
+      whileHover={{
+        scale: 1.1,
+      }}
+      whileTap={{
+        scale: 0.9,
+      }}
+    >
+      <Link href="/#">
+        <FaAngleUp className="text-[#FFFFFC] text-[36px] cursor-pointer" />
+      </Link>
+    </motion.div>
   );
 };

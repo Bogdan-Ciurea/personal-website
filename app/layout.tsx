@@ -2,7 +2,7 @@
 
 import "./globals.css";
 import Header from "../components/header";
-import { ApplyTheme } from "./client-components";
+import { ApplyTheme, ToTopButton } from "./client-components";
 // import { motion, AnimatePresence } from "framer-motion";
 // import { usePathname } from "next/navigation";
 
@@ -59,6 +59,7 @@ export default function RootLayout({
           /> */}
         <ApplyTheme>
           <Header />
+          <ToTopButton />
           {children}
         </ApplyTheme>
         {/* <Header />

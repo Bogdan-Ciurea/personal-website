@@ -1,19 +1,14 @@
 "use client";
 
 import { josefinSans, metrophobic, robotoMono, technologies } from "./data";
-import {
-  motion,
-  useAnimation,
-  useInView,
-  useScroll,
-  useViewportScroll,
-} from "framer-motion";
+import { motion, useAnimation, useInView, useScroll } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { use, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DescriptionElement } from "./data";
 import { ThemeProvider } from "next-themes";
 import { FaAngleUp } from "react-icons/fa";
+import { usePathname } from "next/navigation";
 
 // Window size hook
 export const useWindowSize = () => {
@@ -92,6 +87,20 @@ export const ShowWork = ({ element }: { element: DescriptionElement }) => {
 
   const start = element.imagePosition === "right" ? -300 : 300;
 
+  const startDateString = element.startDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+  });
+  let endDateString;
+  if (element.endDate === undefined) {
+    endDateString = "Present";
+  } else {
+    endDateString = element.endDate.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+    });
+  }
+
   useEffect(() => {
     if (isInView) {
       animateImage.start({
@@ -165,6 +174,15 @@ export const ShowWork = ({ element }: { element: DescriptionElement }) => {
           {element.subtitle}
         </h3>
         <p
+          className={
+            `${metrophobic.className} font-metrophobic text-right` +
+            (element.imagePosition === "right" ? "" : "text-left")
+          }
+          style={{ fontSize: "20px" }}
+        >
+          {startDateString} - {endDateString}
+        </p>
+        <p
           className={`${josefinSans.className} font-josefin-sans text-justify`}
           style={{ fontSize: "24px", fontWeight: 200 }}
         >
@@ -202,12 +220,12 @@ export const ShowTechnologies = () => {
         {technologies.map((category, index) => {
           return (
             <motion.button
-              whileHover={{
-                scale: 1.1,
-              }}
-              whileTap={{
-                scale: 0.9,
-              }}
+              // whileHover={{
+              //   scale: 1.1,
+              // }}
+              // whileTap={{
+              //   scale: 0.9,
+              // }}
               className={`${
                 selected === index
                   ? "bg-[#FFFFFC] text-[#003F91] border-[#003F91] border-2 dark:bg-blue-400  dark:border-0"
@@ -256,9 +274,15 @@ export const ShowTechnologies = () => {
       >
         {technologies[selected].technologies.map((technology) => {
           return (
-            <div
+            <motion.div
               className="flex flex-col justify-center items-center my-auto w-[100px] h-[100px] md:w-[200px] md:h-[200px]"
               key={technology.name}
+              whileHover={{
+                scale: 1.1,
+              }}
+              whileTap={{
+                scale: 0.9,
+              }}
             >
               <Image
                 src={technology.image}
@@ -273,7 +297,7 @@ export const ShowTechnologies = () => {
               >
                 {technology.name}
               </p>
-            </div>
+            </motion.div>
           );
         })}
       </motion.div>
@@ -318,6 +342,7 @@ export const ApplyTheme = ({ children }: { children: React.ReactNode }) => {
 export const ToTopButton = () => {
   const controls = useAnimation();
   const { scrollYProgress } = useScroll();
+  const currentPath = usePathname();
 
   useEffect(() => {
     const threshold = 0.1;
@@ -351,9 +376,12 @@ export const ToTopButton = () => {
         scale: 0.9,
       }}
     >
-      <Link href="/#">
-        <FaAngleUp className="text-[#FFFFFC] text-[36px] cursor-pointer" />
-      </Link>
+      <div className="relative">
+        <div className="bg-black rounded-full w-[60px] h-[60px]"></div>
+        <Link href={currentPath}>
+          <FaAngleUp className="text-[#FFFFFC] text-[36px] cursor-pointer absolute top-[12px] left-[12px]" />
+        </Link>
+      </div>
     </motion.div>
   );
 };

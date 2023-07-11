@@ -37,7 +37,10 @@ const Page = async ({ params }: { params: { slug: string } }) => {
           <p>GitHub</p>
           <ImArrowUpRight2 className="ml-2" />
         </Link>
-        <article className="prose mt-10 w-[100%] prose-a:text-[#F9A826] prose-headings:text-[#F9A826]">
+        <article
+          className="prose mt-10 w-[100%] prose-a:text-[#F9A826] prose-headings:text-[#F9A826]
+          lg:prose-lg xl:prose-xl"
+        >
           {content}
         </article>
       </div>

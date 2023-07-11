@@ -25,6 +25,9 @@ export type DescriptionElement = {
   subtitle: string;
   text: string;
 
+  startDate: Date;
+  endDate?: Date;
+
   image: string;
   imageAlt: string;
   imageWidth: number;
@@ -214,6 +217,8 @@ export const descriptionElements: DescriptionElement[] = [
     title: "University",
     subtitle: "University of Leeds: MEng & BSc Computer Science",
     text: "Successfully completed my BSc in Computer Science with First Class Honours (>70%) and I am currently pursuing my MEng in Computer Science. Throughout my academic journey, I have gained expertise in various subjects such as Software Engineering, Algorithms, Data Structures, Computer Graphics, Artificial Intelligence, Cryptography, and much more.",
+    startDate: new Date("2018-09-01"),
+    endDate: undefined,
     image: "/logo-leeds.png",
     imageAlt: "logo leeds",
     imageWidth: 220,
@@ -225,6 +230,8 @@ export const descriptionElements: DescriptionElement[] = [
     title: "Work",
     subtitle: "R Systems: Junior Software Engineer",
     text: "As a Junior Software Engineer at R Systems, a reputable company specializing in outsourcing services within the telecom industry, I am currently engaged in the maintenance and development of a Java + Rhino solution for a valued client based in the Netherlands. My core responsibilities revolve around ensuring the smooth operation of existing nodes, creating new ones, documenting the software, and providing dedicated client support.",
+    startDate: new Date("2021-11-01"),
+    endDate: undefined,
     image: "/logo-rsystems.png",
     imageAlt: "logo RSystems",
     imageWidth: 220,
@@ -236,6 +243,8 @@ export const descriptionElements: DescriptionElement[] = [
     title: "Work",
     subtitle: "Javery: Software Engineer",
     text: "Taken the lead in making important architecture decisions for software projects, ensuring they perform well, can handle growth, and are reliable. I have closely collaborated with the frontend team to create strong backend systems and databases, making sure everything works together smoothly. I have also learned Next.js and the T3 stack to improve how we develop web applications. By carefully understanding our clients' needs, I have turned their requirements into practical software solutions that go beyond their expectations.",
+    startDate: new Date("2023-02-01"),
+    endDate: undefined,
     image: "/logo-javery.png",
     imageAlt: "logo Javery",
     imageWidth: 220,

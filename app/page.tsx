@@ -103,11 +103,14 @@ const FirstParagraph = () => {
           className={`${josefinSans.className} font-josefin-sans`}
           style={{ fontSize: "24px" }}
         >
-          Computer Science student at the University of Leeds, passionate about
-          software architecture, C++, and web applications. With specialized
-          skills in these areas, I aim to contribute to robust software
-          solutions, delivering exceptional results through attention to detail
-          and continuous professional growth in IT.
+          Recently graduated software developer with hands-on experience in
+          Linux systems, networking, and full-stack development. Proven skills
+          in maintaining servers, deploying new features, and solving technical
+          issues. Successfully led software projects and worked closely with
+          teams to meet client needs. Comfortable with C++, Node.js, and various
+          databases. Passionate about learning and growing in the field.
+          Experienced in training new team members and working on both
+          individual and group projects during university.
         </p>
         <ExternalLinks />
       </div>

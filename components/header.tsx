@@ -190,7 +190,7 @@ const Header = () => {
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-[90%] ">
           <Link href="/" className="flex items-center">
             <Image
-              src="/logo-2.png"
+              src="/logo.png"
               alt="Bogdan Ciurea"
               width="50"
               height="75"

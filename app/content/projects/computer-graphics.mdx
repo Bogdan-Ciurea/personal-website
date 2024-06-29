@@ -1,5 +1,5 @@
 ---
-priority: 9
+priority: 10
 title: "Graphics renderer"
 author: "Bogdan Ciurea + Boris Radulov"
 description: "Rendering Project in C++ using OpenGL, GLSL, & IMGui."
@@ -7,6 +7,53 @@ type: "University Project"
 link: "https://github.com/Bogdan-Ciurea/uni-y3-computer-graphics"
 ---
 
-# Graphics renderer
+# University Graphics Renderer Project
 
-This project is a University coursework for a course named "Computer Graphics". It is a 2-people group project and it had the scope of building a Graphics Renderer software using OpenGL, GLSL, and IMGui.
+**Note that, as this is a University project, you will need to request access to the repository to view the code.**
+
+This project is a **University project** for a course named "Computer Graphics." It is a 2-person group project, developed by me and **Boris Radulov**, with the goal of building a Graphics Renderer software using OpenGL, GLSL, and IMGui in C++.
+
+The foundation of the project was provided by the University. This included a basic project builder using Premake, essential libraries such as glad, glfw, rapidobj, and glm, and a basic structure for the project. This setup helped us focus on implementing the core features of the renderer.
+
+## Features
+
+This project includes several features that were implemented by us:
+
+- **Camera Movement**: Controlled using keyboard and mouse inputs.
+- **Object Animation**: Basic animations for the objects within the scene.
+- **Blinn-Phong Lighting Model**: Implemented for realistic lighting and shading.
+- **Textures**: Added to objects for more detailed rendering.
+- **Texture Mapping**: Applied textures accurately to 3D models.
+- **Hierarchical Modelling**: Structured models with parent-child relationships.
+
+For more details, please check the [assignment brief](/content/projects/computer-graphics/assignment-brief.pdf) that we followed. While we did not implement every feature, we successfully incorporated many, achieving a 71% grade.
+
+## Project Structure
+
+The project structure is straightforward, prioritizing feature implementation:
+
+- `main`: Contains the source code.
+- `assets`: Includes the models and textures used.
+- `third_party` and `support`: Contain external libraries.
+
+## Technologies
+
+The project was written in C++ and utilized multiple libraries to build specific features. The main libraries used were: OpenGL, GLSL, IMGui, glad, glfw, rapidobj, and glm.
+
+## Results
+
+Overall, this was one of my best university projects. Working with Boris and developing software to render 3D objects was a great experience. It was highly educational, and I am pleased with the outcome.
+
+Here are two screenshots of the software in action
+(enjoy the half life map 😅):
+
+![Graphics renderer 1](/content/projects/computer-graphics/result-1.png)
+![Graphics renderer 2](/content/projects/computer-graphics/result-2.png)
+
+## Challenges and Learning
+
+Throughout this project, we encountered several challenges, including optimizing the rendering pipeline and managing memory efficiently. These challenges provided valuable learning experiences in debugging and performance tuning.
+
+## Future Work
+
+Looking forward, a refactoring of the codebase would be beneficial to improve readability and maintainability. Additionally, implementing more advanced features such as shadow mapping and post-processing effects would enhance the renderer's capabilities.

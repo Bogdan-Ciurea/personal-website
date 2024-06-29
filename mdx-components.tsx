@@ -1,5 +1,6 @@
 import type { MDXComponents } from "mdx/types";
 import { josefinSans, metrophobic, robotoMono } from "./app/data";
+import Image from "next/image";
 
 // This file allows you to provide custom React components
 // to be used in MDX files. You can import and use any
@@ -69,20 +70,27 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </ol>
     ),
     li: ({ children }) => <li className="my-2 dark:text-white">{children}</li>,
-    table: ({ children }) => (
-      console.log(children),
-      (<table className="table-auto w-full">{children}</table>)
-    ),
     th: ({ children }) => (
-      console.log(children),
-      (<th className="border border-[#F9A826] px-4 py-2">{children}</th>)
+      <th className="border border-[#F9A826]">{children}</th>
+    ),
+    tr: ({ children }) => (
+      <tr className="border border-[#F9A826]">{children}</tr>
+    ),
+    tbody: ({ children }) => (
+      <tbody className="border border-[#F9A826]">{children}</tbody>
+    ),
+    table: ({ children }) => (
+      <table
+        className={`${robotoMono.className} font-roboto-mono table-auto w-full`}
+      >
+        {children}
+      </table>
     ),
     td: ({ children }) => (
-      console.log(children),
-      (<td className="border border-[#F9A826] px-4 py-2">{children}</td>)
+      <td className="border border-[#F9A826]">{children}</td>
     ),
     pre: ({ children }) => (
-      <pre className="bg-[#b94141] rounded-md p-4">{children}</pre>
+      <pre className="bg-[#b94141] rounded-md">{children}</pre>
     ),
     code: ({ children }) => (
       <code
@@ -91,6 +99,23 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       >
         {children}
       </code>
+    ),
+    em: ({ children }) => (
+      <em
+        className={`${robotoMono.className} italic font-roboto-mono text-[14px] lg:text-[18px] dark:text-white
+      `}
+      >
+        {children}
+      </em>
+    ),
+    img: ({ src, alt }) => (
+      <Image
+        src={src ?? ""}
+        alt={alt ?? ""}
+        width={800}
+        height={400}
+        className="rounded-md"
+      />
     ),
 
     ...components,

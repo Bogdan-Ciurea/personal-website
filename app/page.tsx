@@ -100,7 +100,7 @@ const FirstParagraph = () => {
           Hi, I&apos;m Bogdan!
         </p>
         <p
-          className={`${josefinSans.className} font-josefin-sans`}
+          className={`${josefinSans.className} font-josefin-sans text-justify`}
           style={{ fontSize: "24px" }}
         >
           Recently graduated software developer with hands-on experience in
